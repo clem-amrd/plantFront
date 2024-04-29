@@ -1,0 +1,76 @@
+<form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="age-min">
+                Age Minimum
+            </label>
+            <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+                id="age-min" type="number" placeholder="0" formControlName="ageMin">
+        </div>
+        <div class="w-full md:w-1/2 px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="age-max">
+                Age Maximum
+            </label>
+            <input
+                class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="age-max" type="number" placeholder="25" formControlName="ageMax">
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <input class="mr-2 leading-tight" type="radio" id="male" value="male" formControlName="sex" name="sex">
+        <label class="text-sm" for="male">
+            male
+        </label>
+    </div>
+    <div class="flex items-center mb-6">
+        <input class="mr-2 leading-tight" type="radio" id="femelle" value="femelle" formControlName="sex" name="sex"> 
+        <label class="text-sm" for="femelle">
+            femelle
+        </label>
+    </div>
+    <div class="flex items-center mb-6">
+        <input class="mr-2 leading-tight" type="radio" id="both" formControlName="sex" name="sex">
+        <label class="text-sm" for="both">
+            les deux
+        </label>
+    </div>
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full px-3">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="localisation">
+                Localisation
+            </label>
+                <select name="localisation" id="localisation"formControlName="localisation">
+                    <option value="">Choisissez un département</option>
+                    <option *ngFor="let departement of departements" [value]="departement.id" >
+                      {{ departement.departement }}
+                    </option>
+                  </select>
+        </div>
+    </div>
+    <div class="flex items-center mb-6">
+        <input class="mr-2 leading-tight" type="radio" id="urgent" value="1" formControlName="urgence" name="urgence">
+        <label class="text-sm" for="urgent">
+            Urgent
+        </label>
+    </div>
+    <div class="flex items-center mb-6">
+        <input class="mr-2 leading-tight" type="radio" id="pasUrgent" value="0" formControlName="urgence" name="urgence">
+        <label class="text-sm" for="pasUrgent">
+            Pas Urgent
+        </label>
+    </div>
+    <div class="flex items-center mb-6">
+        <input class="mr-2 leading-tight" type="radio" id="none" formControlName="urgence" name="urgence">
+        <label class="text-sm" for="none">
+            Peu Importe
+        </label>
+    </div>
+    <div class="flex flex-wrap -mx-3 mb-6">
+        <div class="w-full px-3">
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Submit
+            </button>
+        </div>
+    </div>
+</form>

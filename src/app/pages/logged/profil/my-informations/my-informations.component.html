@@ -1,0 +1,39 @@
+<!-- <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <label>Votre nom :</label>
+    <input formControlName="name" type="text">
+    <div *ngIf="form.get('name')?.invalid">name est requis.</div> 
+    <br>
+    <label>Photo de profil actuelle :</label>
+    <img src="{{this.datas.avatarUrl}}">
+    <input type="file" accept="image/*" (change)="onFileSelect($event)"> 
+    <br>
+    <button type="submit" [disabled]="form.invalid">modifier</button>
+</form>
+<div>{{res}}</div> -->
+
+<div class="fixed z-10 top-0 h-16 w-full">
+    <div class="relative flex h-16 items-center">
+        <img class="fixed left-2 pl-3 h-10" src="../../../assets/arrow.svg" (click)="back()" />
+        <div class="flex-grow"><!-- Ajout de la classe flex-grow -->
+            <p class="text-center text-lg"><b>Informations</b></p>
+        </div>
+    </div>
+    <hr>
+  </div>
+  <div class="px-8 pt-20 flex justify-center items-center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mx-auto max-w-xs">
+      <label>Nom d'utilisateur</label>
+      <input formControlName="name" type="text" class="input input-bordered w-full max-w-xs">
+      <div *ngIf="form.get('name')?.invalid" class="text-red-600">Le nom est requis.</div>
+      <br><br>
+      <label>Photo de profil actuelle :</label>
+      <div class="flex justify-center items-center">
+        <img class="rounded-full h-32 my-4" src="{{ this.datas.avatarUrl }}" alt="Photo de profil">
+      </div>
+      <input type="file" accept="image/*" (change)="onFileSelect($event)" class="file-input file-input-bordered w-full mb-2"> 
+      <br>
+      <button type="submit" [disabled]="form.invalid"
+        class="w-full bg-orange text-white p-2 border-solid border-orange border-2 rounded-md hover:bg-white hover:text-orange">modifier</button>
+    </form>
+    <div>{{res}}</div>
+  </div>

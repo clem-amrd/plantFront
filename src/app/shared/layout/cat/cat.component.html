@@ -1,0 +1,22 @@
+<div class="card rounded-3xl bg-cat relative shadow-md">
+    <img class="rounded-t-3xl object-cover h-36 w-full" src="{{photo}}">
+    <img *ngIf="urgent" class="absolute top-3 right-3 w-6 h-6" src="../../../assets/warning.png"/>
+    <div class="flex flex-row m-2 h-6">
+        <div class="basis-3/4">
+            <p class="pl-2"><b>{{name}}</b></p>
+        </div>
+        <div class="basis-1/4 flex items-center">
+            <h4 class="mx-1 px-2 mb-2 text-[#FF6F5A] pt-1">{{ numberOfFavorites }}</h4>
+            <svg id="heart" class="fav mr-1" width="23" height="23" viewBox="0 0 39 34" fill="none"
+                xmlns="http://www.w3.org/2000/svg" [ngStyle]="{'fill': favoris ? '#FF6F5A' : 'none'}">
+                <path
+                    d="M37.3372 5.02309L37.3374 5.02347C39.512 9.32692 38.6588 14.2206 34.5684 19.657L34.5675 19.6583C31.3414 23.9739 26.703 28.2873 19.9554 33.351L19.9545 33.3516C19.8283 33.4468 19.6704 33.5 19.5058 33.5C19.3413 33.5 19.1834 33.4468 19.0571 33.3516L19.0564 33.3511C12.2982 28.2769 7.67015 23.9272 4.44262 19.6562C0.340547 14.22 -0.512427 9.32666 1.66205 5.02347L1.66224 5.02309C3.18167 2.0098 7.62383 -0.526308 12.8933 0.933217C15.4029 1.63385 17.589 3.13521 19.0967 5.18816L19.4997 5.73689L19.9027 5.18816C21.4105 3.13507 23.5968 1.63365 26.1067 0.933082L26.1079 0.932728C31.3621 -0.548645 35.8169 2.00806 37.3372 5.02309Z"
+                    stroke="#FF6F5A" />
+            </svg>
+        </div>
+    </div>
+    <div class="flex flex-wrap mx-2 pb-1">
+        <p class="mx-1 px-2 mb-2 rounded-full text-xs" [ngClass]="{'bg-[#D9E2F5]': sex === 'male', 'bg-[#F4D3EE]': sex === 'female'}">{{sex}}</p>
+        <p class="mx-1 px-2 mb-2 bg-[#B4E0CE] rounded-full text-xs">{{age}} ans</p>
+    </div>
+</div>

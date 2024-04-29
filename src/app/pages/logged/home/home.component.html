@@ -1,0 +1,24 @@
+<div class="mb-16">
+    <div class="rounded-b-lg mb-2 px-6 py-6 bg-white">
+        <app-search [searchTerm]="searchTerm" (action)="handleSearch($event)"></app-search>
+    </div>
+
+    <a [routerLink]="['/myInfos']">
+        <div class="rounded-lg flex flex-row mb-2 px-4 py-4 bg-white">
+
+            <div class="basis-3/12">
+                <img class="p-1 rounded-full border-dashed border-2 border-[#FFD55E] w-16 h-16 object-cover"
+                    src="{{ data.avatarUrl}}">
+            </div>
+            <div class="basis-9/12 flex flex-col items-start justify-center">
+                <p class="font-bold">Bonjour, {{ data.user?.name ?? '' }}</p>
+                <p>{{ data.user?.email ?? '' }}</p>
+            </div>
+        </div>
+    </a>
+
+    <app-favoris></app-favoris>
+    <app-urgent></app-urgent>
+    <app-new></app-new>
+
+</div>

@@ -1,0 +1,105 @@
+<div class="bg-[#F4F4F4] font-montserrat pb-24">
+    <img class="fixed top-3 left-3" src="../../../assets/arrow.svg" (click)="back()" />
+    <svg id="heart" class="fixed top-3 right-3" width="38" height="38" viewBox="0 0 38 38" fill="none"
+        xmlns="http://www.w3.org/2000/svg" (click)="changeFavoris()">
+        <circle cx="19" cy="19" r="19" fill="#F2D468" />
+        <path [ngStyle]="{'fill': data.favoris ? '#FF6F5A' : 'white'}"
+            d="M27.4074 14.399C26.6117 12.7794 24.3195 11.4542 21.6531 12.2257C20.379 12.5907 19.2674 13.3735 18.4999 14.4461C17.7323 13.3735 16.6207 12.5907 15.3466 12.2257C12.6743 11.466 10.3881 12.7794 9.59231 14.399C8.47589 16.6665 8.93909 19.2166 10.97 21.9788C12.5615 24.1403 14.8359 26.3312 18.1376 28.8755C18.242 28.9562 18.3705 29 18.5028 29C18.6352 29 18.7637 28.9562 18.868 28.8755C22.1638 26.3371 24.4442 24.1638 26.0357 21.9788C28.0606 19.2166 28.5238 16.6665 27.4074 14.399Z"
+            fill="white" />
+    </svg>
+    <div class="w-full carousel">
+        <div *ngFor="let photo of data.photos" class="carousel-item w-full">
+            <img src="{{ apiUrl + photo.url }}" class="w-full object-cover" />
+        </div>
+    </div>
+    <div class="bg-white rounded-2xl mx-5 my-2 shadow-[0_0px_2px_0px_rgba(0,0,0,0.05)] py-6 px-8">
+        <p class="text-orange font-bold text-3xl">{{data.name}}</p>
+        <div class="flex my-4">
+            <img src="../../../assets/position.svg" />
+            <p>{{data.localisation?.departement}} | {{data.localisation_id}}</p>
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+            <div class="bg-white rounded-lg border flex flex-col items-center px-2 py-4">
+                <img class="pb-1" src="../../../assets/sex.svg" />
+                <p class="font-semibold text-l">{{data.sex}}</p>
+            </div>
+            <div class="bg-white rounded-lg border flex flex-col items-center px-2 py-4">
+                <img class="pb-1" src="../../../assets/age.svg" />
+                <p class="font-semibold text-l">{{data.age}} ans</p>
+            </div>
+            <div class="bg-white rounded-lg border flex flex-col items-center px-2 py-4">
+                <img class="pb-1" src="../../../assets/race.svg" />
+                <p class="font-semibold text-l">{{data.breed}}</p>
+            </div>
+        </div>
+        <div class="bg-[#E6F2FD] p-4 mt-4 rounded-2xl">
+            <p class="font-bold text-lg">caractère</p>
+            <p>{{data.character}}</p>
+        </div>
+    </div>
+    <div class="bg-white rounded-2xl mx-5 mb-2 shadow-[0_0px_2px_0px_rgba(0,0,0,0.05)] py-4 px-8">
+        <div class="bg-[#FCF2EA] flex flex-row p-4 mt-4 rounded-2xl">
+            <div class="basis-4/12">
+                <img class="rounded-full border-dashed border-2 border-[#FFD55E] w-16 h-16 object-cover"
+                    src="{{ data.avatarUrl}}">
+            </div>
+            <div class="basis-6/12 flex flex-col items-start justify-center">
+                <p class="font-bold">{{ data.user?.name ?? '' }}</p>
+                <p>propriétaire</p>
+            </div>
+            <div class="basis-2/12 flex items-center">
+                <a>
+                    <img (click)="sendEmail(data.user.email)" src="../../../../assets/contact.svg" />
+                </a>
+            </div>
+        </div>
+        <p class="font-bold text-lg mt-2">description</p>
+        <p class="mb-2">{{data.description}}</p>
+    </div>
+    <p class="text-center text-[#A0A0A0] mt-2">ajouté le {{data.created_at}}</p>
+    <nav class="bg-white text-black p-4 shadow-menu fixed inset-x-0 bottom-0 z-10 ">
+        <div class="flex">
+            <button onclick="conditions.showModal()"
+                class="rounded-lg py-2 bg-orange text-white w-2/5 mx-2 font-medium text-md">conditions</button>
+            <button class="rounded-lg py-2 w-3/5 mx-2 border-solid border-2 font-medium text-md" [ngClass]="{
+            'bg-white text-orange border-orange': statut === 0 && (user?.id !== data.user_id),
+            'bg-gray-400 text-gray-600 cursor-not-allowed': statut === 1 && (user?.id !== data.user_id),
+            'bg-green-500 text-white': statut === 2 && (user?.id !== data.user_id),
+            'bg-red-500 text-white': statut === 3 || (user?.id === data.user_id)
+        }" [disabled]="statut === 1 || user?.id == data.user_id" (click)="statut === 0 ? addAdoption() : null">
+                {{ statut === 1 ? 'Demande envoyée' : (statut === 2 && (user?.id !== data.user_id) ? 'Acceptée' :
+                (statut === 3 && (user?.id !== data.user_id) ? 'refusée' : (user?.id == data.user_id ? 'bloqué' :
+                'Demande d\'adoption'))) }}
+            </button>
+            <dialog id="conditions" class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">Conditions d'adoptions</h3>
+                    <p class="py-4">
+                        L'application exige des adopteurs un engagement responsable envers le bien-être du chat, un
+                        environnement adapté, des visites pré-adoptions, une identification permanente, des soins
+                        vétérinaires réguliers, une alimentation appropriée, une responsabilité financière, et
+                        l'interdiction stricte de l'abandon. Ces critères visent à assurer le bon traitement, la santé
+                        et le bonheur des chats adoptés, ainsi qu'à garantir la responsabilité des adopteurs tout au
+                        long de la vie du chat.</p>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <button class="btn">J'ai compris</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+
+            <dialog id="contact" class="modal">
+                <div class="modal-box">
+                    <h3 class="font-bold text-lg">Hello!</h3>
+                    <p class="py-4">Vous pouvez contacter </p>
+                    <div class="modal-action">
+                        <form method="dialog">
+                            <button class="btn">Close</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
+        </div>
+    </nav>
+</div>

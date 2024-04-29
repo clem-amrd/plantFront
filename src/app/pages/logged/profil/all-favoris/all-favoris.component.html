@@ -1,0 +1,16 @@
+<div class="fixed z-10 top-0 h-16 w-full">
+    <div class="relative flex h-16 items-center">
+        <div class="flex-grow"><!-- Ajout de la classe flex-grow -->
+            <p class="text-center text-lg"><b>Favoris</b></p>
+        </div>
+    </div>
+    <hr>
+  </div>
+<div class="mx-4 my-20 grid grid-cols-2 gap-4">
+<ng-container *ngFor="let cat of data">
+    <div class="mb-4">
+        <app-cat [urgent]="cat.urgent" [numberOfFavorites]="cat.count" [id]="cat.id" [sex]="cat.sex" [photo]="cat.photo" [name]="cat.name" [age]="cat.age" [localisation]="cat.localisation" [favoris]="true" (click)="catPage(cat.id)"
+            ></app-cat>
+    </div>
+</ng-container>
+</div>

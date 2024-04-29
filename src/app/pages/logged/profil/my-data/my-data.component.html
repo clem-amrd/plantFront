@@ -1,0 +1,31 @@
+<div class="fixed z-10 top-0 h-16 w-full">
+  <div class="relative flex h-16 items-center">
+      <img class="fixed left-2 pl-3 h-10" src="../../../assets/arrow.svg" (click)="back()" />
+      <div class="flex-grow"><!-- Ajout de la classe flex-grow -->
+          <p class="text-center text-lg"><b>Mot de passe</b></p>
+      </div>
+  </div>
+  <hr>
+</div>
+<div class="px-8 pt-20 flex justify-center items-center">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="mx-auto max-w-xs">
+    <label>mot de passe actuelle :</label>
+    <input formControlName="current_password" type="password" class="input input-bordered w-full max-w-xs">
+    <div *ngIf="form.get('current_password')?.invalid" class="text-red-600">le mot de passe actuel est requis.</div>
+    <br>
+    <label>nouveau mot de passe :</label>
+    <input formControlName="new_password" type="password" class="input input-bordered w-full max-w-xs">
+    <div *ngIf="form.get('new_password')?.invalid" class="text-red-600">le nouveau mot de passe est requis.</div>
+    <br>
+    <label>nouveau mot de passe :</label>
+    <input formControlName="confirmation_password" type="password" class="input input-bordered w-full max-w-xs">
+    <div *ngIf="form.get('confirmation_password')?.invalid" class="text-red-600">la confirmation est requise.</div>
+    <br>
+    <div class="text-gray-600 pt-2"><b>{{res}}</b></div>
+    <button type="submit" [disabled]="form.invalid"
+      class="w-full bg-orange text-white p-2 my-2 border-solid border-orange border-2 rounded-md hover:bg-white hover:text-orange">modifier</button>
+    <div class="w-full border-solid border-red-500 border-2 p-2 mt-4 rounded-md">
+      <p class="text-sm text-red-600">Atention ! Si vous vous êtes connectés avec un compte google et que vous n'avez pas créé de compte, vous devez créer un compte avec la même adresse e-mail pour avoir un mot de passe.</p>
+    </div>
+</form>
+</div>

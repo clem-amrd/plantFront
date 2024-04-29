@@ -1,0 +1,151 @@
+<div class="mb-16 mt-28">
+    <div class="bg-[#F4F4F4] fixed z-50 w-full top-0 text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <img class="pt-4 pl-4" src="../../../assets/arrow.svg" (click)="back()" />
+        <ul class="w-full flex flex-row justify-between -mb-px">
+            <li class="w-1/2">
+                <input type="radio" name="my_tabs_1" id="tab1" role="tab" class="hidden" checked/>
+                <label for="tab1"
+                    class="w-full h-16 inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-orange dark:hover:text-gray-300 cursor-pointer"
+                    [class.border-orange]="currentTab === 'tab1'" (click)="selectTab('tab1')">Demandes envoyées</label>
+            </li>
+            <li class="w-1/2">
+                <input type="radio" name="my_tabs_1" id="tab2" role="tab" class="hidden" />
+                <label for="tab2"
+                    class="w-full h-16 inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-orange dark:hover:text-gray-300 cursor-pointer"
+                    [class.border-orange]="currentTab === 'tab2'" (click)="selectTab('tab2')">Demandes reçues</label>
+            </li>
+        </ul>
+    </div>
+
+    <div role="tabpanel" class="p-4" id="tab1" [hidden]="currentTab !== 'tab1'">
+        <ng-container *ngIf="msgUser === true; else showCats">
+            <ng-container *ngTemplateOutlet="nothing"></ng-container>
+        </ng-container>
+        <ng-template #nothing>
+            <p>Vous n'avez fait aucune demande d'adoption</p>
+        </ng-template>
+        <ng-template #showCats>
+            <div *ngFor="let cat of cats">
+                <div class="relative card mx-4 mb-4 bg-base-100 shadow-xl">
+                    <figure><img src="{{cat.photo}}" /></figure>
+                    <img (click)="catPage(cat.id)" class="absolute top-2 right-3 p-2 cursor-pointer"
+                    src="../../../assets/eye.svg" />
+                    <div class="p-6">
+                        <h2 class="card-title">{{cat.name}}</h2>
+                        <p>{{cat.age}} ans, {{cat.sex}}, {{cat.breed}}</p>
+                        <p>urgent: {{cat.urgent == true ? "oui" : "non"}}</p>
+                        <div class="flex flex-row mt-4">
+                            <ng-container *ngIf="cat.statut === 1">
+                                <ng-container *ngTemplateOutlet="askSend"></ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="cat.statut === 2">
+                                <ng-container *ngTemplateOutlet="accept"></ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="cat.statut === 3">
+                                <ng-container *ngTemplateOutlet="refuse"></ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="msgUser === true">
+                                <ng-container *ngTemplateOutlet="refuse"></ng-container>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #askSend>
+                    <div class="basis-1/2">
+                        <button class="h-16 rounded-lg py-2 w-full border-solid border-2 font-medium text-base bg-gray-400 text-white">demande envoyée</button></div>
+                    <div class="basis-1/2">
+                    <button class="h-16 rounded-lg py-2 w-full border-solid border-2 font-medium text-base bg-red-500 text-white"
+                    (click)="update(cat.id, cat.user_id, 4)"
+                    >annuler</button></div>
+                </ng-template>
+
+                <ng-template #accept>
+                    <div class="basis-1/2">
+                    <button
+                        class="rounded-lg py-2 w-full border-solid border-2 font-medium text-base bg-green-500 text-white"
+                        (click)="update(cat.id, cat.user_id, 5)">
+                        terminer
+                    </button></div>
+                    <div class="basis-1/2">
+                    <button
+                        class="rounded-lg py-2 w-full border-solid border-2 font-medium text-base bg-red-500 text-white"
+                        (click)="update(cat.id, cat.user_id, 4)">
+                        annuler
+                    </button></div>
+                </ng-template>
+                <ng-template #refuse>
+                    <p class="text-red-600">demande refusée</p>
+                </ng-template>
+            </div>
+        </ng-template>
+    </div>
+
+    <div role="tabpanel" class="p-4" id="tab2" [hidden]="currentTab !== 'tab2'">
+        <ng-container *ngIf="msgOwner === true; else showCatsOwner">
+            <ng-container *ngTemplateOutlet="nothingOwner"></ng-container>
+        </ng-container>
+        <ng-template #nothingOwner>
+            <p>Vous n'avez aucune demande d'adoption</p>
+        </ng-template>
+        <ng-template #showCatsOwner>
+            <div *ngFor="let cat of ownerCats">
+                <div class="relative card mx-4 mb-4 bg-base-100 shadow-xl">
+                    <figure><img src="{{cat.photo}}" /></figure>
+                    <img (click)="catPage(cat.id)" class="absolute top-2 right-3 p-2 cursor-pointer"
+                    src="../../../assets/eye.svg" />
+                    <div class="p-6">
+                        <h2 class="card-title">{{cat.name}}</h2>
+                        <p>{{cat.age}} ans, {{cat.sex}}, {{cat.breed}}</p>
+                        <p>urgent: {{cat.urgent == true ? "oui" : "non"}}</p>
+                        <div class="bg-[#FCF2EA] flex flex-row p-4 mt-4 rounded-2xl">
+                            <div class="basis-4/12">
+                                <img class="rounded-full border-dashed border-2 border-[#FFD55E] w-16 h-16 object-cover"
+                                    src="{{ cat.askUser_avatar}}">
+                            </div>
+                            <div class="basis-6/12 flex flex-col items-start justify-center">
+                                <p class="font-bold">{{ cat.askUser_name }}</p>
+                                <p>a fait la demande</p>
+                            </div>
+                            <div class="basis-2/12 flex items-center">
+                                <a>
+                                    <img (click)="sendEmail(cat.askUser_email)" src="../../../../assets/contact.svg" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex flex-row mt-4">
+                            <ng-container *ngIf="cat.statut === 1">
+                                <ng-container *ngTemplateOutlet="askSendOwner"></ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="cat.statut === 2">
+                                <ng-container *ngTemplateOutlet="acceptOwner"></ng-container>
+                            </ng-container>
+                            <ng-container *ngIf="cat.statut === 3">
+                                <ng-container *ngTemplateOutlet="refuseOwner"></ng-container>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <ng-template #askSendOwner>
+                    <div class="basis-1/2">
+                    <button
+                        class="rounded-lg py-2 w-full border-solid border-2 font-medium text-base bg-green-500 text-white"
+                        (click)="update(cat.id, cat.user_id, 2)">
+                        accepter
+                    </button></div>
+                    <div class="basis-1/2">
+                    <button
+                        class="rounded-lg py-2 w-full border-solid border-2 font-medium text-base bg-red-500 text-white"
+                        (click)="update(cat.id, cat.user_id, 3)">
+                        refuser
+                    </button></div>
+                </ng-template>
+                <ng-template #acceptOwner>
+                    <p class="text-green-700">Vous avez accepté la demande</p>
+                </ng-template>
+                <ng-template #refuseOwner>
+                    <p class="text-red-600">Vous avez refusé la demande</p>
+                </ng-template>
+            </div>
+        </ng-template>
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="h-screen flex justify-center items-center bg-gradient-to-br from-orangeGradient to-orange">
+    <div class="fixed top-0 left-0">
+        <img src="../../../assets/rondJaune.svg" />
+    </div>
+    <div class="container font-montserrat align-middle">
+        <div class="flex justify-center items-center">
+            <img src="../../../assets/logo.svg" class="w-48"/>
+        </div>
+        <div *ngIf="error" id="error" class="flex justify-center items-center px-5">
+            <div 
+                class="bg-errorFill text-errorFont border-solid border-2 border-errorStroke font-medium text-center py-2 px-4 rounded-md w-8/12 max-w-xl"
+                routerLink="/register">
+                email ou mot de passe incorrect
+            </div>
+        </div>
+        <div class="flex justify-center items-center">
+            <form class="w-8/12 max-w-xl bg-orange-200 p-5 rounded-lg" (ngSubmit)="onLogin()">
+                <div class="mb-4 relative">
+                    <input [(ngModel)]="email" name="email"
+                        class="bg-transparent border-b border-white w-full py-3 px-6 text-white font-light placeholder-orangeOpacity focus:outline-none"
+                        id="email" type="text" placeholder="email">
+                    <div class="absolute top-3 left-0">
+                        <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                            <path
+                                d="M0.833374 21.0833C0.833374 19.05 1.64111 17.1 3.07889 15.6622C4.51667 14.2244 6.46671 13.4167 8.50004 13.4167C10.5334 13.4167 12.4834 14.2244 13.9212 15.6622C15.359 17.1 16.1667 19.05 16.1667 21.0833H14.25C14.25 19.5583 13.6442 18.0958 12.5659 17.0175C11.4876 15.9391 10.025 15.3333 8.50004 15.3333C6.97505 15.3333 5.51251 15.9391 4.43418 17.0175C3.35584 18.0958 2.75004 19.5583 2.75004 21.0833H0.833374ZM8.50004 12.4583C5.32317 12.4583 2.75004 9.88521 2.75004 6.70833C2.75004 3.53146 5.32317 0.958332 8.50004 0.958332C11.6769 0.958332 14.25 3.53146 14.25 6.70833C14.25 9.88521 11.6769 12.4583 8.50004 12.4583ZM8.50004 10.5417C10.618 10.5417 12.3334 8.82625 12.3334 6.70833C12.3334 4.59042 10.618 2.875 8.50004 2.875C6.38212 2.875 4.66671 4.59042 4.66671 6.70833C4.66671 8.82625 6.38212 10.5417 8.50004 10.5417Z"
+                                fill="white" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="mb-8 relative">
+                    <input [(ngModel)]="password" name="password"
+                        class="bg-transparent border-b border-white w-full py-3 px-6 text-white font-light placeholder-orangeOpacity leading-tight focus:outline-none"
+                        id="password" type="password" placeholder="mot de passe">
+                    <div class="absolute top-4 left-0">
+                        <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                            <path
+                                d="M8 0.666667C9.29365 0.666619 10.537 1.16797 11.4687 2.06539C12.4005 2.9628 12.9482 4.18643 12.9967 5.47917L13 5.66667H13.8333C14.2538 5.66653 14.6588 5.82534 14.9671 6.11125C15.2754 6.39716 15.4643 6.78904 15.4958 7.20833L15.5 7.33333V15.6667C15.5001 16.0871 15.3413 16.4921 15.0554 16.8005C14.7695 17.1088 14.3776 17.2976 13.9583 17.3292L13.8333 17.3333H2.16667C1.74619 17.3335 1.34119 17.1747 1.03288 16.8888C0.724559 16.6028 0.535703 16.211 0.504167 15.7917L0.5 15.6667V7.33333C0.499867 6.91285 0.658672 6.50786 0.944581 6.19954C1.23049 5.89123 1.62237 5.70237 2.04167 5.67083L2.16667 5.66667H3C3 4.34058 3.52678 3.06881 4.46447 2.13113C5.40215 1.19345 6.67392 0.666667 8 0.666667ZM13.8333 7.33333H2.16667V15.6667H13.8333V7.33333ZM8 9C8.35549 9.00011 8.70163 9.11389 8.98787 9.32471C9.2741 9.53553 9.48543 9.83234 9.59098 10.1718C9.69653 10.5113 9.69078 10.8756 9.57456 11.2115C9.45834 11.5475 9.23775 11.8375 8.945 12.0392L8.83333 12.11V13.1667C8.8331 13.3791 8.75177 13.5834 8.60596 13.7378C8.46015 13.8923 8.26087 13.9852 8.04884 13.9976C7.8368 14.0101 7.62802 13.9411 7.46514 13.8048C7.30226 13.6685 7.19759 13.4751 7.1725 13.2642L7.16667 13.1667V12.11C6.84895 11.9265 6.60065 11.6434 6.46026 11.3044C6.31987 10.9655 6.29524 10.5897 6.3902 10.2353C6.48515 9.88092 6.69439 9.56778 6.98544 9.34443C7.2765 9.12109 7.63312 9.00002 8 9ZM8 2.33333C7.11594 2.33333 6.2681 2.68452 5.64298 3.30964C5.01786 3.93477 4.66667 4.78261 4.66667 5.66667H11.3333C11.3333 4.78261 10.9821 3.93477 10.357 3.30964C9.7319 2.68452 8.88406 2.33333 8 2.33333Z"
+                                fill="white" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button
+                        class="bg-white text-orange font-bold py-2 px-4 rounded-full w-full focus:outline-none focus:shadow-outline"
+                        type="submit">
+                        Connexion
+                    </button>
+                </div>
+            </form>
+
+        </div>
+        <div class="flex justify-center items-center px-5">
+            <button
+                class="bg-white text-orange font-bold py-2 px-4 rounded-full w-8/12 max-w-xl focus:outline-none focus:shadow-outline"
+                (click)="navigateToRegister()">
+                inscription
+            </button>
+        </div>
+
+        <div class="flex justify-center items-center p-5">
+            <div class="flex items-center w-8/12 justify-between">
+                <div class="border-t border-white flex-grow mr-2"></div>
+                <p class="text-white font-light flex-shrink-0 px-2">continue avec</p>
+                <div class="border-t border-white flex-grow ml-2"></div>
+            </div>
+        </div>
+        <div class="flex justify-center items-center px-5">
+            <a [href]="APIURLWEB+'/google/auth/redirect'">
+                <img src="../../../assets/google.svg" />
+            </a>
+        </div>
+    </div>
+    <div class="fixed bottom-0 right-0">
+        <img src="../../../assets/rondJauneBas.svg" />
+    </div>
+</div>

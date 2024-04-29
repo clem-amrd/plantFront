@@ -1,0 +1,18 @@
+<div class="flex justify-center">
+    <ul class="steps py-8">
+        <li class="step step-primary">informations</li>
+        <li class="step step-primary">photos</li>
+    </ul>
+</div>
+<form [formGroup]="photoForm" (ngSubmit)="envoyerPhoto()">
+
+    <div class="form-group font-montserrat ">
+        <label for="photos" class="block text-sm font-medium text-gray-700">choisis les photos</label>
+        <input type="file" id="photos" name="photos" 
+            class="file-input file-input-bordered w-full mb-2"
+            (change)="onFileSelect($event)" accept="image/*" multiple required>
+    </div>
+
+    <button type="submit" class="w-full bg-orange text-white p-2 rounded-md font-montserrat "
+        [disabled]="!photoForm.valid" required>ajouter les photos</button>
+</form>

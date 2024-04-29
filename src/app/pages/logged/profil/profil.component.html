@@ -1,0 +1,96 @@
+
+<h1 class="text-2xl mt-8 mb-6 mx-8"><b>Profile</b></h1>
+<div class="mx-8 my-2">
+    <app-user></app-user>
+    <hr>
+    <button class="bg-white w-full py-2  rounded-b-lg h-auto px-4 flex items-center justify-between"
+        [routerLink]="['/myInformations']">
+        modifier le mot de passe
+        <img class="h-6 " src="../../../assets/arrow_profile.png">
+    </button>
+</div>
+<div class="mx-8 my-2">
+    <hr>
+    <button class="bg-white w-full py-2 rounded-t-lg h-auto px-4 flex items-center justify-between"
+        [routerLink]="['/meschats']">
+        mes animaux
+        <img class="h-6 " src="../../../assets/arrow_profile.png">
+    </button>
+    <hr>
+    <button class="bg-white w-full py-2 h-auto px-4 flex items-center justify-between" [routerLink]="['/favoris']">
+        mes favoris
+        <img class="h-6 " src="../../../assets/arrow_profile.png">
+    </button>
+    <hr>
+    <button class="bg-white w-full py-2 rounded-b-lg h-auto px-4 flex items-center justify-between"
+        [routerLink]="['/adoptions']">
+        procédures d'adoption
+        <img class="h-6 " src="../../../assets/arrow_profile.png">
+    </button>
+</div>
+<div class="mx-8 my-2">
+    <button class="bg-white w-full py-2 rounded-t-lg h-auto px-4 flex items-center justify-between" (click)="openDialogLogout()">
+        se deconnecter
+        <img class="h-6 " src="../../../assets/arrow_profile.png">
+    </button>
+    <hr>
+    <button class="bg-white w-full py-2 rounded-b-lg h-auto px-4 flex items-center justify-between"
+        (click)="openDialogDelete()">
+        supprimer mon compte
+        <img class="h-6 " src="../../../assets/arrow_profile.png">
+    </button>
+</div>
+
+<dialog #myDialog class="fixed z-50 top-1/3 w-4/5 rounded-xl">
+    <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+      <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
+        <h3 class="font-bold text-gray-800 dark:text-white">
+         Déconnexion
+        </h3>
+        <button (click)="closeDialogLogout()" type="button" class="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#hs-basic-modal">
+          <span class="sr-only">Close</span>
+          <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-4 overflow-y-auto">
+        <p class="mt-1 text-gray-800 dark:text-gray-400">
+          Vous êtes sur le point de vous deconnecter. Etes-vous sûr ?
+        </p>
+      </div>
+      <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
+        <button type="button" (click)="closeDialogLogout()" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#hs-basic-modal">
+          Annuler
+        </button>
+        <button type="button" (click)="logout()" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-500 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+          se deconnecter
+        </button>
+      </div>
+    </div>
+</dialog>
+
+<dialog #myDialog2 class="fixed z-50 top-1/3 w-4/5 rounded-xl">
+    <div class="flex flex-col bg-white border shadow-sm rounded-xl pointer-events-auto dark:bg-gray-800 dark:border-gray-700 dark:shadow-slate-700/[.7]">
+      <div class="flex justify-between items-center py-3 px-4 border-b dark:border-gray-700">
+        <h3 class="font-bold text-gray-800 dark:text-white">
+         Suppression
+        </h3>
+        <button (click)="closeDialogDelete()" type="button" class="flex justify-center items-center w-7 h-7 text-sm font-semibold rounded-full border border-transparent text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#hs-basic-modal">
+          <span class="sr-only">Close</span>
+          <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-4 overflow-y-auto">
+        <p class="mt-1 text-gray-800 dark:text-gray-400">
+          Vous êtes sur le point de supprimer definitivement votre compte. Etes-vous sûr ?
+        </p>
+      </div>
+      <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
+        <button type="button" (click)="closeDialogDelete()" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-overlay="#hs-basic-modal">
+          Annuler
+        </button>
+        <button type="button" (click)="deleteUser()" class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-red-500 text-white hover:bg-red-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+          supprimer
+        </button>
+      </div>
+    </div>
+</dialog>
