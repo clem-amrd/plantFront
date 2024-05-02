@@ -1,10 +1,6 @@
-<div class="flex border-2 rounded-md w-full">
-    <input type="text" class="px-4 py-2 w-full" placeholder="Recherche..." [(ngModel)]="searchTerm">
-    <button class="justify-center px-4 border-l ml-auto" (click)="search()">
-        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="w-4"
-            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-            <path fill="currentColor"
-                d="M505 442.7l-109.1-109.1c28.4-34.3 45.2-78.1 45.2-125.8C440.9 96.22 344.7 0 226.4 0S11.88 96.22 11.88 214.5S108.1 428.9 226.4 428.9c47.7 0 91.54-16.84 125.8-45.2l109.1 109.1c9.4 9.4 24.56 9.4 33.94 0l9.4-9.4C514.4 467.3 514.4 452.1 505 442.7zM226.4 384c-93.44 0-169.5-76.07-169.5-169.5S133 45.01 226.4 45.01s169.5 76.07 169.5 169.5S319.8 384 226.4 384z" />
-        </svg>
+<div class="flex rounded-full w-full bg-yellow">
+    <input type="text" class="px-4 py-2 w-full rounded-full bg-yellow text-green" placeholder="Rechercher..." [(ngModel)]="searchTerm">
+    <button class="justify-center px-4 ml-auto" (click)="search()">
+        <img src="../../../assets/search.svg"  class="h-7">
     </button>
 </div>

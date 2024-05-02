@@ -1,4 +1,4 @@
-<div *ngIf="CatsExists" class="rounded-lg py-4 mb-2 pl-6 bg-white">
+<!-- <div *ngIf="CatsExists" class="rounded-lg py-4 mb-2 pl-6 bg-white">
     <h1 class="text-lg mb-2 text-orange"><b>chats favoris</b></h1>
     <div class="carousel carousel-center max-w-md py-4 pr-4 space-x-3 rounded-box w-full">
         <ng-container *ngFor="let cat of cats.slice(0, 8)">
@@ -9,4 +9,13 @@
             </div>
         </ng-container>
     </div>
-</div>
+</div> -->
+
+<div class="grid grid-cols-2 gap-4">
+    <div *ngFor="let plant of cats" class="bg-vertGradient rounded-3xl flex flex-col items-center justify-center" (click)="catPage(plant.id)">
+      <img [src]="apiUrl + '/storage/Image/' + plant.photo" alt="{{ plant.name }}" class="w-full h-32 object-cover rounded-t-3xl">
+      <h3 class="mt-2 text-center font-semibold text-yellow">{{ plant.name }}</h3>
+      <h3 *ngIf="plant.fruit == 1" class="mb-2 text-center text-yellow">Fruit</h3>
+      <h3 *ngIf="plant.fruit == 0" class="mb-2 text-center text-yellow">Légume</h3>
+    </div>
+  </div>

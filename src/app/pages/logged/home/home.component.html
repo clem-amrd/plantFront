@@ -1,24 +1,98 @@
-<div class="mb-16">
-    <div class="rounded-b-lg mb-2 px-6 py-6 bg-white">
-        <app-search [searchTerm]="searchTerm" (action)="handleSearch($event)"></app-search>
+<div class="h-screen flex flex-col bg-vertGradient">
+  <div class=" flex w-full top-0 text-sm font-medium text-center text-gray-500 justify-between">
+    <img class="pt-4 pl-4" src="../../../assets/logoJaune.svg" />
+    <div class="flex justify-end items-end pb-2 pr-4">
+      <a href="/profil"><svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10.7779 13.2222C14.1529 13.2222 16.889 10.4862 16.889 7.11111C16.889 3.73604 14.1529 1 10.7779 1C7.40278 1 4.66675 3.73604 4.66675 7.11111C4.66675 10.4862 7.40278 13.2222 10.7779 13.2222Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M20.5556 23C20.5556 20.4068 19.5254 17.9198 17.6917 16.0861C15.858 14.2524 13.371 13.2222 10.7778 13.2222C8.18455 13.2222 5.69753 14.2524 3.86384 16.0861C2.03016 17.9198 1 20.4068 1 23" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg></a>
+
+    </div>
+    </div>
+  <!-- <app-profile></app-profile> -->
+  <div class="date-display py-4">
+    <div class="day-name">{{ dayName }}</div>
+    <div class="full-date">{{ fullDate }}</div>
+  </div>
+
+  <div class="container mx-auto px-4 py-10 flex overflow-x-auto no-scrollbar ">
+    <div class="flex items-center space-x-2">
+      <img src="assets/addPlant.svg" alt="Ajouter des plantes" class="w-32 h-auto">
+      <img src="assets/cuisine.svg" alt="Cuisiner un repas" class="w-32 h-auto">
+      <img src="assets/conseils.svg" alt="Plus de conseils" class="w-32 h-auto">
+    </div>
+  </div>
+
+
+    <div class="container mx-auto px-4 py-4 font-poppins">
+      <!-- Tâche 1 -->
+      <div class="form-control">
+        <label class="cursor-pointer label flex justify-around items-center p-4 bg-beige rounded-full mb-2">
+          <input type="checkbox" class="checkbox checkbox-secondary bg-vertGradient" />
+          <span class="label-text">Planter les tomates</span>
+        </label>
+      </div>
+      <!-- Tâche 2 -->
+      <div class="form-control">
+        <label class="cursor-pointer label flex justify-around items-center p-4 bg-beige rounded-full mb-2">
+          <input type="checkbox" checked="checked" class="checkbox checkbox-secondary bg-vertGradient" />
+          <span class="label-text">Arroser le citronnier</span>
+        </label>
+      </div>
+      <!-- Tâche 3 -->
+      <div class="form-control">
+        <label class="cursor-pointer label flex justify-around items-center p-4 bg-beige rounded-full mb-2">
+          <input type="checkbox" class="checkbox checkbox-secondary bg-vertGradient" />
+          <span class="label-text">Récolter les carottes</span>
+        </label>
+      </div>
     </div>
 
-    <a [routerLink]="['/myInfos']">
-        <div class="rounded-lg flex flex-row mb-2 px-4 py-4 bg-white">
+  <div class="mx-auto px-4 bg-beige py-4 font-poppins rounded-t-3xl">
+    <h2 class="text-lg font-bold text-center py-4">Mes Fruits et Légumes</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <div *ngFor="let plant of myPlants" class="bg-vertGradient rounded-3xl flex flex-col items-center justify-center" (click)="catPage(plant.id)">
+        <img [src]="apiUrl + '/storage/Image/' + plant.photo" alt="{{ plant.name }}" class="w-full h-32 object-cover rounded-t-3xl">
+        <h3 class="mt-2 text-center font-semibold text-yellow">{{ plant.name }}</h3>
+        <h3 *ngIf="plant.fruit == 1" class="mb-2 text-center text-yellow">Fruit</h3>
+        <h3 *ngIf="plant.fruit == 0" class="mb-2 text-center text-yellow">Légume</h3>
+      </div>
+    </div>
+  </div>
 
-            <div class="basis-3/12">
-                <img class="p-1 rounded-full border-dashed border-2 border-[#FFD55E] w-16 h-16 object-cover"
-                    src="{{ data.avatarUrl}}">
-            </div>
-            <div class="basis-9/12 flex flex-col items-start justify-center">
-                <p class="font-bold">Bonjour, {{ data.user?.name ?? '' }}</p>
-                <p>{{ data.user?.email ?? '' }}</p>
-            </div>
-        </div>
-    </a>
+</div>
 
-    <app-favoris></app-favoris>
-    <app-urgent></app-urgent>
-    <app-new></app-new>
+<div class="mb-16">
+<!--    <div class="flex flex-row justify-end rounded-b-lg mb-2 px-6 py-6 bg-white">-->
+<!--      <a href="/profil" class="text-xs">-->
+<!--        <svg width="26" height="33" viewBox="0 0 26 33" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--          <path fill-rule="evenodd" clip-rule="evenodd"-->
+<!--                d="M6.66667 5.75C6.66667 4.42392 7.17589 3.15215 8.08232 2.21447C8.98874 1.27678 10.2181 0.75 11.5 0.75C12.7819 0.75 14.0113 1.27678 14.9177 2.21447C15.8241 3.15215 16.3333 4.42392 16.3333 5.75C16.3333 7.07608 15.8241 8.34785 14.9177 9.28553C14.0113 10.2232 12.7819 10.75 11.5 10.75C10.2181 10.75 8.98874 10.2232 8.08232 9.28553C7.17589 8.34785 6.66667 7.07608 6.66667 5.75ZM6.66667 13.25C5.06432 13.25 3.5276 13.9085 2.39456 15.0806C1.26153 16.2527 0.625 17.8424 0.625 19.5C0.625 20.4946 1.00692 21.4484 1.68674 22.1517C2.36656 22.8549 3.28859 23.25 4.25 23.25H18.75C19.7114 23.25 20.6334 22.8549 21.3133 22.1517C21.9931 21.4484 22.375 20.4946 22.375 19.5C22.375 17.8424 21.7385 16.2527 20.6054 15.0806C19.4724 13.9085 17.9357 13.25 16.3333 13.25H6.66667Z"-->
+<!--                fill="#FF6A59" [attr.fill-opacity]="isProfilePage ? '1' : '0.65'"/>-->
+<!--          <rect y="30" width="26" height="3" rx="1.5" fill="#FF6A59" [attr.fill-opacity]="isProfilePage ? '1' : '0'"/>-->
+<!--        </svg>-->
+<!--      </a>-->
+<!--    <app-search [searchTerm]="searchTerm" (action)="handleSearch($event)"></app-search>-->
+<!--    </div>-->
+
+
+
+
+
+<!--    <a [routerLink]="['/myInfos']">-->
+<!--        <div class="rounded-lg flex flex-row mb-2 px-4 py-4 bg-white">-->
+
+<!--            <div class="basis-3/12">-->
+<!--                <img class="p-1 rounded-full border-dashed border-2 border-[#FFD55E] w-16 h-16 object-cover"-->
+<!--                    src="{{ data.avatarUrl}}">-->
+<!--            </div>-->
+<!--            <div class="basis-9/12 flex flex-col items-start justify-center">-->
+<!--                <p class="font-bold">Bonjour, {{ data.user?.name ?? '' }}</p>-->
+<!--                <p>{{ data.user?.email ?? '' }}</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </a>-->
+
+
 
 </div>

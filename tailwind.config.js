@@ -6,14 +6,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        yellow: '#FFD55E',
+        yellow: '#F3EBD4',
         orange: '#FF6C5A',
         orangeGradient: '#FF855E',
         orangeOpacity: '#FFD7D7',
         errorFill: '#FF6A50',
         errorStroke: '#FF4141',
         errorFont: '#FF3131',
-        cat: '#F6F6F6'
+        cat: '#F6F6F6',
+        greenPlant: '#024F2D',
+        greenFlash: '#35CB6A',
+        yellowGradient: '#EEFF72',
+        vertGradient: '#024F2D',
+        beige: '#F3EBD4'
       },
       boxShadow: {
         'menu': '0 -2px 15px 0px rgba(0, 0, 0, 0.17)',

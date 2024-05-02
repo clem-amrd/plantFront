@@ -15,7 +15,7 @@ import {APIURLWEB} from "../../../../environments/environment";
 export class SearchPageComponent {
   searchTerm: string = '';
   action: any;
-  cats: Cat[] = [];
+  cats: any[] = [];
   number: number = -1;
   data: any = {};
   filterForm: FormGroup;
@@ -27,16 +27,15 @@ export class SearchPageComponent {
 
   constructor(private LoginService: LoginService, private fb: FormBuilder, private CatService: CatService, private route: ActivatedRoute, private router: Router) {
     this.filterForm = this.fb.group({
-      ageMin: ['0', [Validators.min(0), Validators.max(25)]],
-      ageMax: ['25', [Validators.min(0), Validators.max(25)]],
-      sex: ['none', [Validators.maxLength(255)]],
-      localisation: ['none'],
-      urgence: ['none']
+      seedMonth: ['none'],
+      fruitMonth: ['none'],
+      fruit: ['none'],
+      difficulty: ['none'],
+      compatibility: ['none']
     });
   }
 
   ngOnInit() {
-    this.Localisation();
     this.route.queryParams.subscribe(params => {
       if ('query' in params) {
         const searchQuery = params['query'];
@@ -47,22 +46,36 @@ export class SearchPageComponent {
       }
     });
     this.handleSearch(this.searchTerm);
+    console.log(this.filterForm.value);
   }
 
-  //recuperer tout les departements
-  Localisation() {
-    this.LoginService.allDepartement()
-      .then(response => {
-        console.log("tous les departements: ", response);
-        this.departements = response;
-        console.log(this.departements)
-        this.departements.forEach((departement: any) => {
-          console.log(typeof departement, departement.id);
-        });
-      })
-      .catch(error => {
-        console.error('une erreur s\'est produite', error);
-      });
+  addPlantToGarden(plantId: number): void {
+    console.log(`Trying to add plant with ID: ${plantId}`);
+    this.LoginService.addPlante(plantId).then(response => {
+      console.log('Plant added successfully:', response);
+      this.updatePlantStatus(plantId, true);
+    }).catch(error => {
+      console.error('Error adding plant:', error);
+    });
+  }
+
+  deletePlantToGarden(plantId: number): void {
+    console.log(`Trying to delete plant with ID: ${plantId}`);
+    this.LoginService.deletePlante(plantId).then(response => {
+      console.log('Plant deleted successfully:', response);
+      this.updatePlantStatus(plantId, false);
+    }).catch(error => {
+      console.error('Error deleting plant:', error);
+    });
+  }
+
+  updatePlantStatus(plantId: number, isInGarden: boolean): void {
+    const plant = this.cats.find(p => p.id === plantId);
+    if (plant) {
+      plant.isInGarden = isInGarden;
+      // Force Angular to detect changes
+      this.cats = [...this.cats];
+    }
   }
 
   onSubmit() {
@@ -73,23 +86,31 @@ export class SearchPageComponent {
   async handleSearch(term: string) {
     console.log('Recherche pour', term);
     this.data.search = term;
-    this.data.ageMin = this.filterForm.get('ageMin')?.value;
-    this.data.ageMax = this.filterForm.get('ageMax')?.value;
-    if (this.filterForm.get('sex')?.value !== "none") {
-      this.data.sex = this.filterForm.get('sex')?.value;
+    if (this.filterForm.get('seedMonth')?.value !== "none") {
+      this.data.seedMonth = this.filterForm.get('seedMonth')?.value;
     } else {
-      delete this.data.sex;
+      delete this.data.seedMonth;
     }
-    if (this.filterForm.get('localisation')?.value !== "none") {
-      this.data.localisation_id = this.filterForm.get('localisation')?.value;
+    if (this.filterForm.get('fruitMonth')?.value !== "none") {
+      this.data.fruitMonth = this.filterForm.get('fruitMonth')?.value;
     } else {
-      delete this.data.localisation_id;
+      delete this.data.fruitMonth;
     }
-    if (this.filterForm.get('urgence')?.value !== "none") {
-      this.data.urgence = this.filterForm.get('urgence')?.value;
+    if (this.filterForm.get('fruit')?.value !== "none") {
+      this.data.fruit = this.filterForm.get('fruit')?.value;
+    } else {
+      delete this.data.fruit;
+    }
+    if (this.filterForm.get('difficulty')?.value !== "none") {
+      this.data.difficulty = this.filterForm.get('difficulty')?.value;
+    } else {
+      delete this.data.difficulty;
+    }
+    if (this.filterForm.get('compatibility')?.value !== "none") {
+      this.data.compatibility = this.filterForm.get('compatibility')?.value;
     }
     else {
-      delete this.data.urgence;
+      delete this.data.compatibility;
     }
     console.log("data: ", this.data)
     this.LoginService.search(this.data)
@@ -105,15 +126,8 @@ export class SearchPageComponent {
           console.log(this.cats);
           this.number = this.cats.length;
           console.log(this.cats);
-          for (let cat of response) {
-            if (cat.photo !== "/storage/Image/") {
-              cat.photo = this.apiUrl + cat.photo;
-            } else {
-              cat.photo = this.apiUrl + "/storage/Image/inconnu.jpg";
-            }
-          }
         }
-        this.getCount();
+        // this.getCount();
       })
       .catch(error => {
         console.error('une erreur s\'est produite', error);
@@ -126,13 +140,13 @@ export class SearchPageComponent {
   }
 
   //recuperer le nombre de personnes qui ont mis en favoris le chat
-  async getCount() {
-    const response = await this.LoginService.countForCat({catTab: this.cats});
-    this.cats.forEach(cat => {
-      const catId = cat.id;
-      cat.count = response[catId];
-    });
-  }
+  // async getCount() {
+  //   const response = await this.LoginService.countForCat({catTab: this.cats});
+  //   this.cats.forEach(cat => {
+  //     const catId = cat.id;
+  //     cat.count = response[catId];
+  //   });
+  // }
 
   //faire apparaitre les filtres
   showFilters(): void {

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LoginService } from '../../../../shared/services/login.service';
 import { CatService } from '../../../../shared/services/cat.service';
 import { Router } from '@angular/router';
-import { Cat } from '../../../../shared/model/cat';
+import { APIURLWEB } from "../../../../../environments/environment";
 
 @Component({
   selector: 'app-favoris',
@@ -13,9 +13,10 @@ export class FavorisComponent {
   catName: string = "";
   catAge: number = 0;
   catLocalisation: string = "";
-  cats: Cat[] = [];
+  cats: any[] = [];
   CatsExists: boolean = false;
   fav: boolean = true;
+  apiUrl = APIURLWEB;
 
   constructor(private LoginService: LoginService, private CatService: CatService, private router: Router) { }
 
@@ -28,8 +29,6 @@ export class FavorisComponent {
     this.LoginService.allFavoris().then((response) => {
       if (!response.message) {
         this.CatsExists = true;
-        this.cats = this.CatService.getCat(response);
-        this.getCount();
       }
     });
   }

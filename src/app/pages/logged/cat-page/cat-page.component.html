@@ -1,105 +1,164 @@
-<div class="bg-[#F4F4F4] font-montserrat pb-24">
-    <img class="fixed top-3 left-3" src="../../../assets/arrow.svg" (click)="back()" />
-    <svg id="heart" class="fixed top-3 right-3" width="38" height="38" viewBox="0 0 38 38" fill="none"
+<div class="bg-[#F4F4F4] font-montserrat">
+    <img class="fixed top-4 left-4 z-10 h-9" src="../../../assets/arrow.svg" (click)="back()" />
+    <!-- <svg id="heart" class="fixed top-3 right-3 z-10" width="38" height="38" viewBox="0 0 38 38" fill="none"
         xmlns="http://www.w3.org/2000/svg" (click)="changeFavoris()">
         <circle cx="19" cy="19" r="19" fill="#F2D468" />
         <path [ngStyle]="{'fill': data.favoris ? '#FF6F5A' : 'white'}"
             d="M27.4074 14.399C26.6117 12.7794 24.3195 11.4542 21.6531 12.2257C20.379 12.5907 19.2674 13.3735 18.4999 14.4461C17.7323 13.3735 16.6207 12.5907 15.3466 12.2257C12.6743 11.466 10.3881 12.7794 9.59231 14.399C8.47589 16.6665 8.93909 19.2166 10.97 21.9788C12.5615 24.1403 14.8359 26.3312 18.1376 28.8755C18.242 28.9562 18.3705 29 18.5028 29C18.6352 29 18.7637 28.9562 18.868 28.8755C22.1638 26.3371 24.4442 24.1638 26.0357 21.9788C28.0606 19.2166 28.5238 16.6665 27.4074 14.399Z"
             fill="white" />
-    </svg>
-    <div class="w-full carousel">
-        <div *ngFor="let photo of data.photos" class="carousel-item w-full">
-            <img src="{{ apiUrl + photo.url }}" class="w-full object-cover" />
-        </div>
+    </svg> -->
+    <svg id="heart" class="fixed top-4 right-4 z-10" width="40" height="38" viewBox="0 0 38 38" fill="none"
+        xmlns="http://www.w3.org/2000/svg" (click)="changeFavoris()">
+        <g filter="url(#filter0_b_110_248)">
+            <path d="M39 12.3988C39 15.4058 37.8718 18.2941 35.857 20.4306C31.2193 25.3503 26.7211 30.4803 21.9101 35.2217C20.8073 36.2927 19.058 36.2536 18.0027 35.1342L4.14214 20.4306C-0.0473798 15.9862 -0.0473798 8.81128 4.14214 4.36694C8.37283 -0.121071 15.2651 -0.121071 19.4957 4.36694L19.9996 4.90137L20.5031 4.36725C22.5316 2.21431 25.2942 1 28.1801 1C31.066 1 33.8284 2.21419 35.857 4.36694C37.872 6.50366 39 9.39178 39 12.3988Z" 
+            [ngStyle]="{
+              'fill': data.favoris ? '#EEFF72' : 'white',
+              'fill-opacity': data.favoris ? '1' : '0.26',
+              'stroke': 'white',
+              'stroke-linejoin': 'round'
+            }"/>
+        </g>
+        <defs>
+        <filter id="filter0_b_110_248" x="-7.5" y="-7.5" width="55" height="52" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+        <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+        <feGaussianBlur in="BackgroundImageFix" stdDeviation="4"/>
+        <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_110_248"/>
+        <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_110_248" result="shape"/>
+        </filter>
+        </defs>
+        </svg>
+    <div class="relative w-full z-0"> <!-- Ajout de la classe relative ici -->
+        <img src="{{ apiUrl + '/storage/Image/' + data.photo }}" class="w-full object-cover" />
     </div>
-    <div class="bg-white rounded-2xl mx-5 my-2 shadow-[0_0px_2px_0px_rgba(0,0,0,0.05)] py-6 px-8">
-        <p class="text-orange font-bold text-3xl">{{data.name}}</p>
-        <div class="flex my-4">
-            <img src="../../../assets/position.svg" />
-            <p>{{data.localisation?.departement}} | {{data.localisation_id}}</p>
-        </div>
-        <div class="grid grid-cols-3 gap-4">
-            <div class="bg-white rounded-lg border flex flex-col items-center px-2 py-4">
-                <img class="pb-1" src="../../../assets/sex.svg" />
-                <p class="font-semibold text-l">{{data.sex}}</p>
-            </div>
-            <div class="bg-white rounded-lg border flex flex-col items-center px-2 py-4">
-                <img class="pb-1" src="../../../assets/age.svg" />
-                <p class="font-semibold text-l">{{data.age}} ans</p>
-            </div>
-            <div class="bg-white rounded-lg border flex flex-col items-center px-2 py-4">
-                <img class="pb-1" src="../../../assets/race.svg" />
-                <p class="font-semibold text-l">{{data.breed}}</p>
-            </div>
-        </div>
-        <div class="bg-[#E6F2FD] p-4 mt-4 rounded-2xl">
-            <p class="font-bold text-lg">caractère</p>
-            <p>{{data.character}}</p>
-        </div>
-    </div>
-    <div class="bg-white rounded-2xl mx-5 mb-2 shadow-[0_0px_2px_0px_rgba(0,0,0,0.05)] py-4 px-8">
-        <div class="bg-[#FCF2EA] flex flex-row p-4 mt-4 rounded-2xl">
-            <div class="basis-4/12">
-                <img class="rounded-full border-dashed border-2 border-[#FFD55E] w-16 h-16 object-cover"
-                    src="{{ data.avatarUrl}}">
-            </div>
-            <div class="basis-6/12 flex flex-col items-start justify-center">
-                <p class="font-bold">{{ data.user?.name ?? '' }}</p>
-                <p>propriétaire</p>
-            </div>
-            <div class="basis-2/12 flex items-center">
-                <a>
-                    <img (click)="sendEmail(data.user.email)" src="../../../../assets/contact.svg" />
-                </a>
-            </div>
-        </div>
-        <p class="font-bold text-lg mt-2">description</p>
-        <p class="mb-2">{{data.description}}</p>
-    </div>
-    <p class="text-center text-[#A0A0A0] mt-2">ajouté le {{data.created_at}}</p>
-    <nav class="bg-white text-black p-4 shadow-menu fixed inset-x-0 bottom-0 z-10 ">
-        <div class="flex">
-            <button onclick="conditions.showModal()"
-                class="rounded-lg py-2 bg-orange text-white w-2/5 mx-2 font-medium text-md">conditions</button>
-            <button class="rounded-lg py-2 w-3/5 mx-2 border-solid border-2 font-medium text-md" [ngClass]="{
-            'bg-white text-orange border-orange': statut === 0 && (user?.id !== data.user_id),
-            'bg-gray-400 text-gray-600 cursor-not-allowed': statut === 1 && (user?.id !== data.user_id),
-            'bg-green-500 text-white': statut === 2 && (user?.id !== data.user_id),
-            'bg-red-500 text-white': statut === 3 || (user?.id === data.user_id)
-        }" [disabled]="statut === 1 || user?.id == data.user_id" (click)="statut === 0 ? addAdoption() : null">
-                {{ statut === 1 ? 'Demande envoyée' : (statut === 2 && (user?.id !== data.user_id) ? 'Acceptée' :
-                (statut === 3 && (user?.id !== data.user_id) ? 'refusée' : (user?.id == data.user_id ? 'bloqué' :
-                'Demande d\'adoption'))) }}
-            </button>
-            <dialog id="conditions" class="modal">
-                <div class="modal-box">
-                    <h3 class="font-bold text-lg">Conditions d'adoptions</h3>
-                    <p class="py-4">
-                        L'application exige des adopteurs un engagement responsable envers le bien-être du chat, un
-                        environnement adapté, des visites pré-adoptions, une identification permanente, des soins
-                        vétérinaires réguliers, une alimentation appropriée, une responsabilité financière, et
-                        l'interdiction stricte de l'abandon. Ces critères visent à assurer le bon traitement, la santé
-                        et le bonheur des chats adoptés, ainsi qu'à garantir la responsabilité des adopteurs tout au
-                        long de la vie du chat.</p>
-                    <div class="modal-action">
-                        <form method="dialog">
-                            <button class="btn">J'ai compris</button>
-                        </form>
-                    </div>
+    <div class="relative bg-yellow rounded-t-3xl shadow-[0_0px_2px_0px_rgba(0,0,0,0.05)] py-6 px-8 -mt-8">
+        <!-- Ajout de la classe -mt-8 pour la marge négative -->
+        <p class="text-greenPlant font-bold text-2xl">{{data.name}}</p>
+        <p class="text-greenPlant py-2">{{data.description}}</p>
+        <div class="flex justify-around my-6">
+            <div class="flex flex-col place-items-center">
+                <div class="bg-greenPlant rounded-full border items-center px-4 py-4 w-16 h-16">
+                    <img *ngIf="dataLevel(data.watering) == 30" class="pb-1 h-8 w-8" src="../../../assets/goute_30.svg" />
+                    <img *ngIf="dataLevel(data.watering) == 60" class="pb-1 h-8 w-8" src="../../../assets/goute_60.svg" />
+                    <img *ngIf="dataLevel(data.watering) == 100" class="pb-1 h-8 w-8" src="../../../assets/goute_100.svg" />
                 </div>
-            </dialog>
+                <p class="font-semibold text-xs text-center">arrosage</p>
+            </div>
+            <div class="flex flex-col place-items-center">
+                <div class="bg-greenPlant rounded-full border items-center px-4 py-4 w-16 h-16">
+                    <p class="text-yellow font-bold">{{data.temperature_perfect}}°C</p>
+                
+                </div>
+                <p class="font-semibold text-xs text-center">Température <br>idéale</p>
+            </div>
+            <div class="flex flex-col place-items-center">
+                <div class="bg-greenPlant rounded-full border items-center px-4 py-4 w-16 h-16">
+                    <img *ngIf="dataLevel(data.light) == 30" class="pb-1 h-8 w-8" src="../../../assets/soleille_30.svg" />
+                    <img *ngIf="dataLevel(data.light) == 60" class="pb-1 h-8 w-8" src="../../../assets/soleille_60.svg" />
+                    <img *ngIf="dataLevel(data.light) == 100" class="pb-1 h-8 w-8" src="../../../assets/soleille_100.svg" />
+                    
+                </div><p class="font-semibold text-xs text-center">luminosité</p>
+            </div>
+            <div class="flex flex-col place-items-center">
+                <div class="bg-greenPlant rounded-full border items-center px-4 py-4 w-16 h-16">
+                    <img *ngIf="data.toxicity == 1" class="pb-1 h-8 w-8" src="../../../assets/toxic.svg" />
+                    <img *ngIf="data.toxicity == 0" class="pb-1 h-8 w-8" src="../../../assets/good.svg" />
+                    
+                </div><p class="font-semibold text-xs text-center">Toxicité</p>
+            </div>
 
-            <dialog id="contact" class="modal">
-                <div class="modal-box">
-                    <h3 class="font-bold text-lg">Hello!</h3>
-                    <p class="py-4">Vous pouvez contacter </p>
-                    <div class="modal-action">
-                        <form method="dialog">
-                            <button class="btn">Close</button>
-                        </form>
-                    </div>
-                </div>
-            </dialog>
         </div>
-    </nav>
+    </div>
+    <hr>
+    <div class="bg-greenPlant shadow-[0_0px_2px_0px_rgba(0,0,0,0.05)] py-4 px-8">
+        <p *ngIf="wateringDate" class="text-yellow font-bold text-lg">Prochain arrosage</p>
+        <p *ngIf="!wateringDate" class="text-yellow font-bold text-lg">Fréquence d'arrosage</p>
+        <p class="text-yellow text-base">{{ wateringPlantDate | date: 'dd/MM/yyyy' }}</p>
+        <div *ngIf="wateringDate" class="flex justify-around my-4">
+            <div *ngFor="let day of weekDays"
+                [ngClass]="{'bg-[#EEFF72] text-greenPlant': isSameDay(day.date), 'bg-transparent text-greenFlash': !isSameDay(day.date)}"
+                class="h-8 w-8 rounded-full flex justify-center items-center text-xs text-center relative border-2 border-yellow">
+                {{ day.date | date: 'MM' }}
+                <span
+                    class="absolute top-12 left-1/2 transform -translate-x-1/2 -translate-y-full text-xs text text-yellow font-bold">
+                    {{ day.day }}
+                </span>
+            </div>
+        </div>
+        <div *ngIf="!wateringDate" class="flex justify-around my-4 text-yellow">
+            <p>Cette plante est à arroser tous les {{ this.wateringPlant }} jours</p>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="bg-yellow shadow-[0_0px_2px_0px_rgba(0,0,0,0.05)] py-4 px-8">
+    <p class="text-greenPlant font-bold text-xl">Tailles</p>
+    <div class="flex justify-around my-4">
+        <div class="h-28 px-2">
+            <img class="pb-1 h-28 w-28" src="../../../assets/sizePlant.svg" />
+        </div>
+        <div class=" bg-greenPlant h-28 w-44 rounded-2xl py-4 pl-6 text-yellow leading-5">
+            <p><b>Taille maximum :</b></p>
+            <p>{{data.maximum_height}} cm</p>
+            <p><b>Taille moyenne :</b></p>
+            <p>{{data.average_height}} cm</p>
+        </div>
+    </div>
+</div>
+<hr>
+<div class="bg-yellow shadow-[0_0px_2px_0px_rgba(0,0,0,0.05)] pb-4 px-8">
+    <p class="text-greenPlant font-bold text-xl">Les différentes périodes</p>
+    <p class="text-greenPlant">Période de plantation</p>
+    <div class="wrapper">
+
+        <div class="gantt">
+            <div class="gantt__row gantt__row--months">
+                <span>J</span><span>F</span><span>M</span>
+                <span>A</span><span>M</span><span>J</span>
+                <span>J</span><span>A</span><span>S</span>
+                <span>O</span><span>N</span><span>D</span>
+            </div>
+            <div class="gantt__row gantt__row--lines" data-month="5">
+            </div>
+            <div class="gantt__row">
+                <ul class="gantt__row-bars">
+                    <li [ngStyle]="{'grid-column': gridColumnSeed, 'background-color': '#35CB6A'}"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <p class="text-greenPlant">Période de récolte</p>
+    <div class="wrapper">
+
+        <div class="gantt">
+            <div class="gantt__row gantt__row--months">
+                <span>J</span><span>F</span><span>M</span>
+                <span>A</span><span>M</span><span>J</span>
+                <span>J</span><span>A</span><span>S</span>
+                <span>O</span><span>N</span><span>D</span>
+            </div>
+            <div class="gantt__row gantt__row--lines" data-month="5">
+            </div>
+            <div class="gantt__row">
+                <ul class="gantt__row-bars">
+                    <li [ngStyle]="{'grid-column': gridColumnFruit, 'background-color': '#35CB6A'}"></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
+<hr>
+<div class="bg-greenPlant shadow-[0_0px_2px_0px_rgba(0,0,0,0.05)] py-4 px-8">
+    <p class="text-yellow font-bold text-xl">Températures</p>
+    <div class="flex justify-around my-4">
+        <div class="h-28 px-2">
+            <img class="pb-1 h-28 w-28" src="../../../assets/therm.svg" />
+        </div>
+        <div class=" bg-yellow h-28 w-44 rounded-2xl py-4 pl-4 text-greenPlant leading-5">
+            <p><b>Température max :</b></p>
+            <p>{{data.temperature_max}}°C</p>
+            <p><b>Température min :</b></p>
+            <p>{{data.temperature_min}}°C</p>
+        </div>
+    </div>
 </div>

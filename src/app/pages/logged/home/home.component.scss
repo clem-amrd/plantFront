@@ -1,3 +1,69 @@
 p{
     color: #444444;
 }
+
+.date-display {
+  background-color: #024F2D; /* Couleur de fond verte */
+  color: #FFFFFF; /* Texte blanc */
+  font-family: 'Arial', sans-serif; /* Police de caractères */
+   /* Centrage du texte */
+  padding: 2rem; /* Espacement autour du texte */
+  text-transform: capitalize;
+}
+
+.day-name, .month-year {
+  font-size: 24px; /* Taille de la police pour le jour et le mois */
+  font-weight: bold; /* Texte en gras */
+}
+
+.full-date {
+  font-size: 30px; /* Très grande taille de police pour le numéro du jour */
+  font-weight: bold; /* Texte en gras */
+  //line-height: 70px; /* Ajustement de l'espacement de ligne */
+
+}
+
+///* Optional: Hides scrollbar for all browsers */
+//.no-scrollbar::-webkit-scrollbar {
+//  display: none;
+//}
+//.no-scrollbar {
+//  -ms-overflow-style: none;  /* IE and Edge */
+//  scrollbar-width: none;  /* Firefox */
+//}
+
+.home-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  transition: transform 0.3s ease-in-out;
+}
+
+.handle-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #ccc;
+  cursor: ns-resize;
+}
+
+.expanded {
+  transform: translateY(-90%); /* Adjust the percentage to control how much of the panel is visible when expanded */
+}
+
+.content {
+  padding: 20px;
+}
+
+.plant-item {
+  margin-bottom: 10px;
+  text-align: center;
+}

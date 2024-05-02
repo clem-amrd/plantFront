@@ -12,7 +12,7 @@ import {APIURLWEB} from "../../../../../environments/environment";
 export class AllFavorisComponent {
   constructor(private LoginService: LoginService, private router: Router) { }
 
-  data: Cat[] = [];
+  data: any[] = [];
   apiUrl = APIURLWEB;
   noCats: boolean = true;
 
@@ -30,7 +30,7 @@ export class AllFavorisComponent {
         }
         this.data = response;
         console.log(this.data);
-        this.getCount();
+        // this.getCount();
       }
       });
   }
@@ -41,12 +41,12 @@ export class AllFavorisComponent {
   }
 
   //recuperer le nombre de personnes qui ont mis en favoris le chat
-  async getCount() {
-    const response = await this.LoginService.countForCat({catTab: this.data});
-    this.data.forEach(cat => {
-      const catId = cat.id;
-      cat.count = response[catId];
-    });
-  }
+  // async getCount() {
+  //   const response = await this.LoginService.countForCat({catTab: this.data});
+  //   this.data.forEach(cat => {
+  //     const catId = cat.id;
+  //     cat.count = response[catId];
+  //   });
+  // }
 
 }

@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,400,700");
+
+/* Configuration de base pour le corps et la page HTML */
+body, html {
+    font-family: "Roboto", sans-serif;
+    background-color: #cddade;
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Configuration du wrapper pour centrer et définir la largeur maximale de la section principale */
+.wrapper {
+    max-width: 95%;
+    margin: 0 auto;
+    padding: 2vw;
+}
+
+/* Styles de base pour le diagramme de Gantt */
+.gantt {
+    display: grid;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 75px 125px -57px #7e8f94;
+}
+
+/* Configuration des lignes du Gantt, chaque ligne est un grid */
+.gantt__row {
+    display: grid;
+    background-color: #fff;
+    
+    /* Alternance de couleurs pour les lignes */
+    &:nth-child(odd) {
+        background-color: #F3EBD4;
+    }
+}
+
+/* Configuration spécifique pour la ligne des mois */
+.gantt__row--months {
+    color: #2b2b2b;
+    background-color: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    grid-template-columns: repeat(12, 1fr); /* 12 colonnes pour les 12 mois */
+    span {
+        text-align: center;
+        font-size: calc(3px + 1vw); /* Taille de police responsive */
+        padding: 1vw 0;
+        font-weight: bold;
+    }
+}
+
+/* Ligne pour les barres de projet */
+.gantt__row-bars {
+    list-style: none;
+    display: grid;
+    padding: 9px 0;
+    margin: 0;
+    grid-template-columns: repeat(12, 1fr); /* Correspondance avec les 12 mois */
+    grid-gap: 8px 0;
+    border-top: 1px solid rgba(221, 221, 221, 0.8);
+    li {
+        font-weight: 500;
+        text-align: left;
+        font-size: 14px;
+        min-height: 15px;
+        background-color: #55de84;
+        padding: 5px 12px;
+        color: #fff;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        border-radius: 20px;
+    }
+}
+
+/* Media queries pour rendre le diagramme responsive */
+@media (max-width: 768px) {
+    .wrapper {
+        padding: 10px;
+    }
+
+    .gantt__row--months span,
+    .gantt__row--lines span {
+        font-size: 12px; /* Police plus petite pour les petits écrans */
+        padding: 5px 0;
+    }
+
+    .gantt__row-bars li {
+        padding: 3px 6px; /* Ajustement des paddings */
+    }
+}
+
+@media (max-width: 480px) {
+    .gantt {
+        box-shadow: none; /* Suppression de l'ombre sur les très petits écrans */
+    }
+
+    .gantt__row--months span {
+        font-size: 10px; /* Taille de police encore plus petite */
+    }
+}

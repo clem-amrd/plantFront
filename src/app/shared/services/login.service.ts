@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { APIURL, APIURLWEB } from "../../../environments/environment";
-import { User } from "../../shared/model/user";
-import { Cat } from "../../shared/model/cat";
+import { User } from "../model/user";
+import { Cat } from "../model/cat";
 import { Observable, Subject } from 'rxjs';
 import { Router } from "@angular/router";
 import { Form, FormGroup } from '@angular/forms';
+import {data} from "autoprefixer";
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,77 @@ export class LoginService {
 
     return req.toPromise();
   }
+  async region(): Promise<any> {
+    const action = `/plant/allRegion`;
+      try {
+        const response = await this.requestApi(APIURL, action, 'GET');
+        console.log('Response:', response);
+        return response;
+      } catch (error) {
+        console.error('Error:', error);
+        return Promise.reject(error);
+      }
+  }
+  async saveQuestionnaire(formData: any): Promise<any> {
+    const action = `/user/conditionUser`;
+    try {
+      const response = await this.requestApi(APIURL, action, 'POST', formData);
+      console.log('Response:', response);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      return Promise.reject(error);
+    }
+  }
+
+  async getRecommandation(): Promise<any> {
+    const action = `/plant/recommendation`;
+    try {
+      const response = await this.requestApi(APIURL, action, 'GET');
+      console.log('Response:', response);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      return Promise.reject(error);
+    }
+  }
+
+  async addPlante(plant_id: number): Promise<any> {
+    const action = `/plant/addPlant/${plant_id}`;
+    try {
+      const response = await this.requestApi(APIURL, action, 'GET', data);
+      console.log('Response:', response);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      return Promise.reject(error);
+    }
+  }
+
+  async deletePlante(plant_id: number): Promise<any> {
+    const action = `/plant/deletePlant/${plant_id}`;
+    try {
+      const response = await this.requestApi(APIURL, action, 'GET', data);
+      console.log('Response:', response);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      return Promise.reject(error);
+    }
+  }
+
+  async showPlante(): Promise<any> {
+    const action = `/plant/allMyPlant`;
+    try {
+      const response = await this.requestApi(APIURL, action, 'GET', data);
+      console.log('Response:', response);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      return Promise.reject(error);
+    }
+  }
+
 
   public async userAuth(): Promise<any> {
     const action = `/user/userAuth`;
@@ -85,6 +157,7 @@ export class LoginService {
       console.error('Error:', error);
       return Promise.reject(error);
     }
+
   }
 
   public async init() {
@@ -131,6 +204,87 @@ export class LoginService {
       if(response.avatarUrl.includes("https") == false){
         response.avatarUrl = APIURLWEB + response.avatarUrl;
       }
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      return Promise.reject(error);
+    }
+  }
+
+    //MODIFIE CLEM
+    public async plantById(id: number): Promise<any> {
+      const action = `/plant/${id}`;
+      try {
+        const response = await this.requestApi(APIURL, action, 'GET');
+        console.log('Response:', response);
+        return response;
+      } catch (error) {
+        console.error('Error:', error);
+        return Promise.reject(error);
+      }
+    }
+  
+      //MODIFIE CLEM
+  public async deleteFavoris(id: number): Promise<any> {
+
+    const action = `/plant/deleteFavoris/${id}`;
+    try {
+      const response = await this.requestApi(APIURL, action, 'GET');
+      console.log('Response:', response);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      return Promise.reject(error);
+    }
+  }
+
+  //MODIFIE CLEM
+  public async addFavoris(id: number): Promise<any> {
+
+    const action = `/plant/addFavoris/${id}`;
+    try {
+      const response = await this.requestApi(APIURL, action, 'GET');
+      console.log('Response:', response);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      return Promise.reject(error);
+    }
+  }
+
+  //CLEM
+  public async watering(id: number): Promise<any> {
+
+    const action = `/plant/watering/${id}`;
+    try {
+      const response = await this.requestApi(APIURL, action, 'GET');
+      console.log('Response:', response);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      return Promise.reject(error);
+    }
+  }
+
+  //CLEM
+  public async wateringPlant(id: number): Promise<any> {
+
+    const action = `/plant/wateringPlant/${id}`;
+    try {
+      const response = await this.requestApi(APIURL, action, 'GET');
+      console.log('Response:', response);
+      return response;
+    } catch (error) {
+      console.error('Error:', error);
+      return Promise.reject(error);
+    }
+  }
+
+  public async search(data: any = {}): Promise<any> {
+    const action = "/plant/filters";
+    try {
+      const response = await this.requestApi(APIURL, action, 'POST', data);
+      console.log('Response:', response);
       return response;
     } catch (error) {
       console.error('Error:', error);
@@ -256,56 +410,10 @@ export class LoginService {
 
   public async allFavoris(): Promise<any> {
 
-    const action = `/cat/allfavoris`;
+    const action = `/plant/allfavoris`;
     try {
       const response = await this.requestApi(APIURL, action, 'GET');
       console.log('Response:', response);
-      return response;
-    } catch (error) {
-      console.error('Error:', error);
-      return Promise.reject(error);
-    }
-  }
-
-  public async deleteFavoris(id: number): Promise<any> {
-
-    const action = `/cat/deleteFavoris/${id}`;
-    try {
-      const response = await this.requestApi(APIURL, action, 'GET');
-      console.log('Response:', response);
-      return response;
-    } catch (error) {
-      console.error('Error:', error);
-      return Promise.reject(error);
-    }
-  }
-
-  public async addFavoris(id: number): Promise<any> {
-
-    const action = `/cat/addFavoris/${id}`;
-    try {
-      const response = await this.requestApi(APIURL, action, 'GET');
-      console.log('Response:', response);
-      return response;
-    } catch (error) {
-      console.error('Error:', error);
-      return Promise.reject(error);
-    }
-  }
-
-  public async myCats(): Promise<any> {
-
-    const action = `/cat/displayCats`;
-    try {
-      const response = await this.requestApi(APIURL, action, 'GET');
-      console.log('Response:', response);
-      response.forEach((cat: any) => {
-        if (cat.photo == "/storage/Image/") {
-          cat.photo = APIURLWEB + "/storage/Image/inconnu.jpg";
-        }else{
-          cat.photo = APIURLWEB + cat.photo;
-        }
-      });
       return response;
     } catch (error) {
       console.error('Error:', error);
@@ -337,6 +445,8 @@ export class LoginService {
     }
   }
 
+
+
   public async deleteCat(id: number): Promise<any> {
     const action = `/cat/delete/${id}`;
     try {
@@ -353,18 +463,6 @@ export class LoginService {
     try {
       const response = await this.requestApi(APIURL, action, 'POST', data);
       return true;
-    } catch (error) {
-      console.error('Error:', error);
-      return Promise.reject(error);
-    }
-  }
-
-  public async search(data: any = {}): Promise<any> {
-    const action = "/cat/filters";
-    try {
-      const response = await this.requestApi(APIURL, action, 'POST', data);
-      console.log('Response:', response);
-      return response;
     } catch (error) {
       console.error('Error:', error);
       return Promise.reject(error);
@@ -438,7 +536,7 @@ export class LoginService {
       localStorage.removeItem('apiToken');
       this.token = undefined;
       this.user = undefined;
-      this.router.navigate(['/login']);
+      this.router.navigate(['/welcome']);
     } catch (error) {
       console.error('Error:', error);
       return Promise.reject(error);
@@ -453,7 +551,7 @@ export class LoginService {
       localStorage.removeItem('apiToken');
       this.token = undefined;
       this.user = undefined;
-      this.router.navigate(['/login']);
+      this.router.navigate(['/welcome']);
     } catch (error) {
       console.error('Error:', error);
       return Promise.reject(error);
@@ -481,7 +579,7 @@ export class LoginService {
         console.error('une erreur s\'est produite', error);
       });
   }
-  
+
   //ADOPTIONS
 
   public async currentAdoption(data: {}): Promise<any> {

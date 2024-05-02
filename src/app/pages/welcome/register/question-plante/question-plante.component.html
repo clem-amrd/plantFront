@@ -1,0 +1,59 @@
+<div class="h-screen flex justify-center items-center bg-beige py-5">
+  <div class="fixed z-50 w-full top-0 text-sm font-medium text-center text-gray-500">
+    <img class="pt-4 pl-4" src="../../../assets/arrow.svg" (click)="back()" />
+  </div>
+  <div class="w-full px-4">
+    <h1 class="text-3xl font-bold text-center mt-10 mb-5">
+      Avez-vous des fruits ou légumes ?
+    </h1>
+    <div>
+
+<!--        <div class="flex flex-row justify-around items-center">-->
+<!--          <button class="btn bg-vertGradient flex-1 mx-2 p-4 h-32 flex flex-col justify-end bg-green-500" (click)="selectOption('Oui')">-->
+<!--            <img src="../../../assets/oui.svg" alt="Oui" class="h-30 w-30 mb-2">-->
+<!--            <span class="text-white text-xl self-end">OUI</span>-->
+<!--          </button>-->
+<!--          <button class="btn bg-yellowGradient flex-1 mx-2 p-4 h-32 flex flex-col justify-end bg-yellow-500" (click)="selectOption('Non')">-->
+<!--            <img src="../../../assets/non.svg" alt="Non" class="h-30 w-30 mb-2">-->
+<!--            <span class="text-black text-xl self-end">NON</span>-->
+<!--          </button>-->
+<!--        </div>-->
+      <div class="flex flex-row justify-around items-center">
+        <button class="btn bg-vertGradient flex-1 mx-2 p-4 h-48 flex flex-col justify-between items-center bg-green-500 relative" (click)="selectOption('Oui')">
+          <img src="../../../assets/oui.svg" alt="Oui" class="absolute left-14 -translate-y-6 h-30 w-30">
+          <span class="text-white text-xl mt-auto">OUI</span>
+        </button>
+        <button class="btn bg-yellowGradient flex-1 mx-2 p-4 h-48 flex flex-col justify-between items-center bg-yellow-500 relative" (click)="selectOption('Non')">
+          <img src="../../../assets/non.svg" alt="Non" class="absolute top- left- transform -translate-x- -translate-y-6 h-30 w-30">
+          <span class="text-black text-xl mt-auto">NON</span>
+        </button>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<!--<div class="h-screen flex justify-center items-center bg-gradient-to-br from-orangeGradient to-orange py-5">-->
+<!--  <div class="fixed z-50 w-full top-0 text-sm font-medium text-center text-gray-500">-->
+<!--    <img class="pt-4 pl-4" src="../../../assets/arrow.svg" (click)="back()" />-->
+<!--  </div>-->
+<!--  <div class="w-full px-4">-->
+<!--    <h1 class="text-3xl font-bold text-center mb-10">-->
+<!--      Avez-vous des fruits ou légumes ?-->
+<!--    </h1>-->
+<!--    <div class="flex flex-row justify-around items-center">-->
+<!--      <button class="btn flex flex-col items-center justify-center bg-vertGradient text-white p-4 rounded-lg" (click)="selectOption('Oui')">-->
+<!--        <img src="../../../assets/oui.svg" alt="Oui" class="h-12 w-12 mb-2">-->
+<!--        <span>OUI</span>-->
+<!--      </button>-->
+<!--      <button class="btn flex flex-col items-center justify-center bg-yellow-500 text-white p-4 rounded-lg" (click)="selectOption('Non')">-->
+<!--        <img src="../../../assets/non.svg" alt="Non" class="h-12 w-12 mb-2">-->
+<!--        <span>NON</span>-->
+<!--      </button>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+
