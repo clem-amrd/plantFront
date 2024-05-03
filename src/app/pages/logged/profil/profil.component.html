@@ -1,34 +1,6 @@
 
 <h1 class="text-2xl mt-8 mb-6 mx-8"><b>Profile</b></h1>
 <div class="mx-8 my-2">
-    <app-user></app-user>
-    <hr>
-    <button class="bg-white w-full py-2  rounded-b-lg h-auto px-4 flex items-center justify-between"
-        [routerLink]="['/myInformations']">
-        modifier le mot de passe
-        <img class="h-6 " src="../../../assets/arrow_profile.png">
-    </button>
-</div>
-<div class="mx-8 my-2">
-    <hr>
-    <button class="bg-white w-full py-2 rounded-t-lg h-auto px-4 flex items-center justify-between"
-        [routerLink]="['/meschats']">
-        mes animaux
-        <img class="h-6 " src="../../../assets/arrow_profile.png">
-    </button>
-    <hr>
-    <button class="bg-white w-full py-2 h-auto px-4 flex items-center justify-between" [routerLink]="['/favoris']">
-        mes favoris
-        <img class="h-6 " src="../../../assets/arrow_profile.png">
-    </button>
-    <hr>
-    <button class="bg-white w-full py-2 rounded-b-lg h-auto px-4 flex items-center justify-between"
-        [routerLink]="['/adoptions']">
-        procédures d'adoption
-        <img class="h-6 " src="../../../assets/arrow_profile.png">
-    </button>
-</div>
-<div class="mx-8 my-2">
     <button class="bg-white w-full py-2 rounded-t-lg h-auto px-4 flex items-center justify-between" (click)="openDialogLogout()">
         se deconnecter
         <img class="h-6 " src="../../../assets/arrow_profile.png">

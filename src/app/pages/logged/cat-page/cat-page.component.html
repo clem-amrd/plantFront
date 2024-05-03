@@ -46,7 +46,6 @@
             <div class="flex flex-col place-items-center">
                 <div class="bg-greenPlant rounded-full border items-center px-4 py-4 w-16 h-16">
                     <p class="text-yellow font-bold">{{data.temperature_perfect}}°C</p>
-                
                 </div>
                 <p class="font-semibold text-xs text-center">Température <br>idéale</p>
             </div>
@@ -73,11 +72,12 @@
         <p *ngIf="wateringDate" class="text-yellow font-bold text-lg">Prochain arrosage</p>
         <p *ngIf="!wateringDate" class="text-yellow font-bold text-lg">Fréquence d'arrosage</p>
         <p class="text-yellow text-base">{{ wateringPlantDate | date: 'dd/MM/yyyy' }}</p>
+        <p *ngIf="wateringDate" class="text-yellow text-base">semaine du {{ firstDayString }} au {{ lastDayString }}</p>
         <div *ngIf="wateringDate" class="flex justify-around my-4">
-            <div *ngFor="let day of weekDays"
+            <div *ngFor="let day of weekDays" 
                 [ngClass]="{'bg-[#EEFF72] text-greenPlant': isSameDay(day.date), 'bg-transparent text-greenFlash': !isSameDay(day.date)}"
                 class="h-8 w-8 rounded-full flex justify-center items-center text-xs text-center relative border-2 border-yellow">
-                {{ day.date | date: 'MM' }}
+                {{ day.date}}
                 <span
                     class="absolute top-12 left-1/2 transform -translate-x-1/2 -translate-y-full text-xs text text-yellow font-bold">
                     {{ day.day }}

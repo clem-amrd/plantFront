@@ -17,6 +17,7 @@ import {QuestionProfilComponent} from "./pages/welcome/register/question-profil/
 import {QuestionPotagerComponent} from "./pages/welcome/register/question-potager/question-potager.component";
 import {QuestionPlanteComponent} from "./pages/welcome/register/question-plante/question-plante.component";
 import {RecommandationComponent} from "./pages/recommandation/recommandation.component";
+import {CalendarComponent} from "./pages/logged/calendar/calendar.component";
 
 const routes: Routes = [
   {path: 'welcome', component: WelcomeComponent},
@@ -32,15 +33,13 @@ const routes: Routes = [
 
       {path: 'home', component: HomeComponent},
       {path: 'search', component: SearchPageComponent},
+      {path: 'calendar', component: CalendarComponent},
       {path: 'profil', component: ProfilComponent},
       {path: 'favoris', component: AllFavorisComponent},
-      {path: 'myInfos', component: MyInformationsComponent},
-      {path: 'adoptions', component: MyAdoptionsComponent},
-      {path: 'myInformations', component: MyDataComponent},
       {path: '', redirectTo: 'home', pathMatch: 'full'}
     ]
   },
-  {path: 'cat', component: CatPageComponent, canActivate: [authGuard]},
+  {path: 'plant', component: CatPageComponent, canActivate: [authGuard]},
   { path: 'recommandation', component: RecommandationComponent, canActivate: [authGuard] },
 ];
 

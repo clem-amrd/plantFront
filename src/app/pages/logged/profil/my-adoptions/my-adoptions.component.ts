@@ -93,7 +93,7 @@ export class MyAdoptionsComponent {
 
 //renvoyer vers la page du chat
 catPage(id: number): void {
-  this.router.navigate(['/cat'], { queryParams: { query: id } });
+  this.router.navigate(['/plant'], { queryParams: { query: id } });
 }
 
 //retour

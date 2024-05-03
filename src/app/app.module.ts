@@ -27,6 +27,7 @@ import { QuestionProfilComponent } from './pages/welcome/register/question-profi
 import { QuestionPotagerComponent } from './pages/welcome/register/question-potager/question-potager.component';
 import { QuestionPlanteComponent } from './pages/welcome/register/question-plante/question-plante.component';
 import { RecommandationComponent } from './pages/recommandation/recommandation.component';
+import { CalendarComponent } from './pages/logged/calendar/calendar.component';
 
 
 
@@ -54,6 +55,7 @@ import { RecommandationComponent } from './pages/recommandation/recommandation.c
     QuestionPotagerComponent,
     QuestionPlanteComponent,
     RecommandationComponent,
+    CalendarComponent,
     ProfileComponent
   ],
   imports: [

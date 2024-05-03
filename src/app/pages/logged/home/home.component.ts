@@ -63,7 +63,7 @@ export class HomeComponent implements OnInit {
 
   catPage(term: number): void {
     console.log('Recherche pour', term);
-    this.router.navigate(['/cat'], { queryParams: { query: term } });
+    this.router.navigate(['/plant'], { queryParams: { query: term } });
   }
 
   //rechercher un chat

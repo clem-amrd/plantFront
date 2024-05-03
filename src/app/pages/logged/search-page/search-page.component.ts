@@ -7,6 +7,13 @@ import { Localisation } from '../../../shared/model/localisation';
 import { Cat } from '../../../shared/model/cat';
 import {APIURLWEB} from "../../../../environments/environment";
 
+interface Plant {
+  id: number;
+  name: string;
+  imageUrl: string;
+}
+
+
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
@@ -15,7 +22,7 @@ import {APIURLWEB} from "../../../../environments/environment";
 export class SearchPageComponent {
   searchTerm: string = '';
   action: any;
-  cats: any[] = [];
+  plants: any[] = [];
   number: number = -1;
   data: any = {};
   filterForm: FormGroup;
@@ -29,9 +36,9 @@ export class SearchPageComponent {
     this.filterForm = this.fb.group({
       seedMonth: ['none'],
       fruitMonth: ['none'],
-      fruit: ['none'],
+      fruit: ['none'],  // Assurez-vous que ce contrôle est uniquement pour le fruit
       difficulty: ['none'],
-      compatibility: ['none']
+      compatibility: ['none']  // Contrôle distinct pour la compatibilité
     });
   }
 
@@ -46,35 +53,49 @@ export class SearchPageComponent {
       }
     });
     this.handleSearch(this.searchTerm);
-    console.log(this.filterForm.value);
+    console.log("test : ", this.filterForm.get('fruit')?.value === 'none');
   }
 
-  addPlantToGarden(plantId: number): void {
-    console.log(`Trying to add plant with ID: ${plantId}`);
+  loadRecommendations(): void {
+    this.LoginService.getRecommandation().then(data => {
+      this.plants = data.map((plant: Plant) => ({
+        ...plant,
+        own: localStorage.getItem(`plant-${plant.id}`) === 'true'
+      }));
+      console.log('Recommandations chargées', this.plants);
+    }).catch(error => {
+      console.error('Erreur lors du chargement des recommandations', error);
+    });
+  }
+ 
+ 
+  addPlantToGarden(plantId: number, own: boolean): void {
     this.LoginService.addPlante(plantId).then(response => {
       console.log('Plant added successfully:', response);
+      own = true;
       this.updatePlantStatus(plantId, true);
     }).catch(error => {
       console.error('Error adding plant:', error);
     });
   }
-
-  deletePlantToGarden(plantId: number): void {
-    console.log(`Trying to delete plant with ID: ${plantId}`);
+ 
+ 
+  deletePlantToGarden(plantId: number, own: boolean): void {
     this.LoginService.deletePlante(plantId).then(response => {
       console.log('Plant deleted successfully:', response);
+      own = false;
       this.updatePlantStatus(plantId, false);
     }).catch(error => {
       console.error('Error deleting plant:', error);
     });
   }
 
-  updatePlantStatus(plantId: number, isInGarden: boolean): void {
-    const plant = this.cats.find(p => p.id === plantId);
+  updatePlantStatus(plantId: number, own: boolean): void {
+    const plant = this.plants.find(p => p.id === plantId);
     if (plant) {
-      plant.isInGarden = isInGarden;
+      plant.own = own;
       // Force Angular to detect changes
-      this.cats = [...this.cats];
+      this.plants = [...this.plants];
     }
   }
 
@@ -119,13 +140,13 @@ export class SearchPageComponent {
           console.log(response.message);
           this.responseMessage = response.message;
           this.number = 0;
-          this.cats = [];
+          this.plants = [];
         } else {
           this.responseMessage = null;
-          this.cats = response;
-          console.log(this.cats);
-          this.number = this.cats.length;
-          console.log(this.cats);
+          this.plants = response;
+          console.log(this.plants);
+          this.number = this.plants.length;
+          console.log(this.plants);
         }
         // this.getCount();
       })
@@ -136,7 +157,7 @@ export class SearchPageComponent {
 
   //renvoyer vers la page du chat
   catPage(id: number): void {
-    this.router.navigate(['/cat'], { queryParams: { query: id } });
+    this.router.navigate(['/plant'], { queryParams: { query: id } });
   }
 
   //recuperer le nombre de personnes qui ont mis en favoris le chat

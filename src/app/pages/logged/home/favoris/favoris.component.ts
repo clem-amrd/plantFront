@@ -36,7 +36,7 @@ export class FavorisComponent {
   //renvoyer vers la page du chat
   catPage(term: number): void {
     console.log('Recherche pour', term);
-    this.router.navigate(['/cat'], { queryParams: { query: term } });
+    this.router.navigate(['/plant'], { queryParams: { query: term } });
   }
 
   //recuperer le nombre de personnes qui ont mis le chat en favoris

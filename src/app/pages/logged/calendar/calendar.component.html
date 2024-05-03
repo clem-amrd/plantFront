@@ -1,0 +1,37 @@
+<div class="h-screen flex flex-col bg-vertGradient">
+  <div class=" w-full top-0 text-sm font-medium text-center text-gray-500">
+    <img class="pt-4 pl-4" src="../../../assets/arrow.svg" (click)="back()"/>
+    <!--    <h1 class="text-xl font-bold mb-4">AGENDA</h1>-->
+  </div>
+  <div class="flex date-display pt-8 px-4 justify-start">
+    <div class="day-name text-white text-xl font-bold mx-8">{{ monthName }}</div>
+    <!--      <div class="full-date">{{ fullDate }}</div>-->
+  </div>
+
+  <div class="flex mb-4 px-8 py-8 text-vertGradient">
+    <div *ngFor="let day of days; let i = index" class="min-w-max mr-2 ">
+      <div class="text-center py-2 px-4 h-28 rounded-full  border border-solid" [class.bg-yellowGradient]="day.active"
+           [class.bg-beige]="!day.active">
+        <div class="pt-3 font-bold text-4xl">{{ day.date }}</div>
+        <div class="text-md">{{ day.month }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="space-y-4 px-4 ">
+    <ul class="relative before:absolute before:w-0.5 before:bg-yellowGradient before:top-0 before:bottom-0 before:left-6 mb-24">
+      <li *ngFor="let event of events" class="flex items-start mt-4">
+        <div class="absolute w-5 h-5 bg-yellowGradient rounded-full  transform translate-x-4 translate-y-12" [class.bg-yellowGradient]="event.active"
+             [class.bg-beige]="!event.active" ></div>
+        <div class="bg-beige ml-10 rounded-lg shadow-lg p-4 flex flex-col w-72" [class.bg-yellowGradient]="event.active"
+             [class.bg-beige]="!event.active">
+          <h3 class="font-bold text-vertGradient">{{ event.type }}</h3>
+          <p class="text-vertGradient">{{ event.description }}</p><br>
+          <span class="text-xs text-vertGradient">{{ event.date }}</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+
+
+</div>

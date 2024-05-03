@@ -1,4 +1,4 @@
-<div class="w-full h-full bg-greenPlant">
+<div class="w-full h-full bg-greenPlant mb-8">
     <div class="flex px-4 pt-6 pb-4">
         <app-search class="w-full" [searchTerm]="searchTerm" (action)="handleSearch($event)"></app-search>
         <button class="ml-2 w-16 h-10" (click)="showFilters()">
@@ -10,10 +10,10 @@
         <form [formGroup]="filterForm" (ngSubmit)="onSubmit()" class="space-y-4">
             <div class="flex">
                 <div class="w-full">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="seedMonth">
+                    <label class="block uppercase tracking-wide text-yellow text-xs font-bold mb-2" for="seedMonth">
                         Mois de plantation
                     </label>
-                    <select class="select select-bordered w-full max-w-xs" name="seedMonth" id="seedMonth"
+                    <select class="select select-bordered border-full w-full max-w-xs" name="seedMonth" id="seedMonth"
                         formControlName="seedMonth">
                         <option selected value="none">tous les mois</option>
                         <option value="01">Janvier</option>
@@ -31,7 +31,7 @@
                     </select>
                 </div>
                 <div class="w-full px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="fruitMonth">
+                    <label class="block uppercase tracking-wide text-yellow text-xs font-bold mb-2" for="fruitMonth">
                         Mois de récolte
                     </label>
                     <select class="select select-bordered w-full max-w-xs" name="fruitMonth" id="fruitMonth"
@@ -56,16 +56,16 @@
                 <div class="flex items-center">
                     <input class="sr-only" type="radio" id="true" value="1" formControlName="fruit" name="fruit">
                     <label for="true"
-                        class="text-sm cursor-pointer px-4 py-2 bg-[#D9E2F5] text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-[#AEC1E8]"
-                        [class.bg-[#AEC1E8]]="filterForm.get('fruit')?.value === '1'">
+                        class="bg-[#D9E2F5] text-sm cursor-pointer px-4 py-2 text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-green-500"
+                        [class.bg-green-500]="filterForm.get('fruit')?.value === '1'">
                         Fruit
                     </label>
                 </div>
                 <div class="flex items-center">
                     <input class="sr-only" type="radio" id="false" value="0" formControlName="fruit" name="fruit">
                     <label for="false"
-                        class="text-sm cursor-pointer px-4 py-2 bg-[#D9E2F5] text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-[#AEC1E8]"
-                        [class.bg-[#AEC1E8]]="filterForm.get('fruit')?.value === '0'">
+                        class="bg-[#D9E2F5] text-sm cursor-pointer px-4 py-2 text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-green-500"
+                        [class.bg-green-500]="filterForm.get('fruit')?.value === '0'">
                         Légume
                     </label>
                 </div>
@@ -73,14 +73,14 @@
                     <input class="sr-only" type="radio" id="bothFruit" value="none" formControlName="fruit"
                         name="fruit">
                     <label for="bothFruit"
-                        class="text-sm cursor-pointer px-4 py-2 bg-[#D9E2F5] text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-[#AEC1E8]"
-                        [class.bg-[#AEC1E8]]="filterForm.get('fruit')?.value === 'none'">
+                        class="bg-[#D9E2F5] text-sm cursor-pointer px-4 py-2 text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-green-500"
+                        [class.bg-green-500]="filterForm.get('fruit')?.value === 'none'">
                         Les deux
                     </label>
                 </div>
             </div>
             <div class="w-full">
-                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="difficulty">
+                <label class="block uppercase tracking-wide text-yellow text-xs font-bold mb-2" for="difficulty">
                     Difficulté
                 </label>
                 <select class="select select-bordered w-full max-w-xs" name="difficulty" id="difficulty"
@@ -97,26 +97,26 @@
                     <input class="sr-only" type="radio" id="jardin" value="1" formControlName="compatibility"
                         name="compatibility">
                     <label for="jardin"
-                        class="text-sm cursor-pointer px-4 py-2 bg-[#D9E2F5] text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-[#AEC1E8]"
-                        [class.bg-[#AEC1E8]]="filterForm.get('compatibility')?.value === '1'">
+                        class="text-sm cursor-pointer px-4 py-2 bg-[#D9E2F5] text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-green-500"
+                        [class.bg-green-500]="filterForm.get('compatibility')?.value === '1'">
                         Jardin
                     </label>
                 </div>
                 <div class="flex items-center mb-2">
-                    <input class="sr-only" type="radio" id="terrasse" value="0" formControlName="compatibility"
+                    <input class="sr-only" type="radio" id="terrasse" value="2" formControlName="compatibility"
                         name="compatibility">
                     <label for="terrasse"
-                        class="text-sm cursor-pointer px-4 py-2 bg-[#D9E2F5] text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-[#AEC1E8]"
-                        [class.bg-[#AEC1E8]]="filterForm.get('compatibility')?.value === '0'">
+                        class="text-sm cursor-pointer px-4 py-2 bg-[#D9E2F5] text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-green-500"
+                        [class.bg-green-500]="filterForm.get('compatibility')?.value === '2'">
                         Terrasse/Balcon
                     </label>
                 </div>
-                <div class="flex items-center">
+                <div class="flex items-center mb-2">
                     <input class="sr-only" type="radio" id="bothCompatibility" value="none"
                         formControlName="compatibility" name="compatibility">
                     <label for="bothCompatibility"
-                        class="text-sm cursor-pointer px-4 py-2 bg-[#D9E2F5] text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-[#AEC1E8]"
-                        [class.bg-[#AEC1E8]]="filterForm.get('compatibility')?.value === 'none'">
+                        class="text-sm cursor-pointer px-4 py-2 bg-[#D9E2F5] text-gray-800 rounded-full transition duration-300 ease-in-out hover:bg-green-500"
+                        [class.bg-green-500]="filterForm.get('compatibility')?.value === 'none'">
                         Les deux
                     </label>
                 </div>
@@ -138,14 +138,14 @@
         </ng-container>
     </div> -->
 
-    <div class="pb-4 px-4 flex-1 overflow-y-auto">
+    <div class="pb-4 px-4 flex-1 overflow-y-auto mb-8">
         <ul>
-            <li *ngFor="let plant of cats"
-                class="bg-white rounded-lg p-4 shadow mb-4 flex items-center justify-between">
+            <li *ngFor="let plant of plants"
+                class="bg-yellow rounded-3xl pr-4 shadow mb-4 flex items-center justify-between h-28">
                 <div class="flex items-center" (click)="catPage(plant.id)">
-                    <img [src]="apiUrl + '/storage/Image/' + plant.photo" alt="{{ plant.name }}" class="h-12 w-12 rounded-full mr-4">
+                    <img [src]="apiUrl + '/storage/Image/' + plant.photo" alt="{{ plant.name }}" class="h-28 w-28 rounded-l-3xl mr-8">
                     <div class="flex flex-col">
-                        <span class="font-medium">{{ plant.name }}</span>
+                        <span class="text-lg">{{ plant.name }}</span>
                         <!--            <span class="text-sm text-gray-500">{{ plant.category }}</span>-->
                     </div>
                 </div>
@@ -155,20 +155,22 @@
                 <!--          </svg>-->
                 <!--        </button>-->
 
-                <button *ngIf="!plant.isInGarden" class="text-green-500" (click)="addPlantToGarden(plant.id)">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 4.5v15m7.5-7.5h-15"></path>
+                <button *ngIf="!plant.own" class="text-green-500 mr-4" (click)="addPlantToGarden(plant.id, plant.own)">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 20C0 8.95431 8.95431 0 20 0V0C31.0457 0 40 8.95431 40 20V20C40 31.0457 31.0457 40 20 40V40C8.95431 40 0 31.0457 0 20V20Z" fill="#024F2D"/>
+                      <path d="M2 20C2 10.0589 10.0589 2 20 2V2C29.9411 2 38 10.0589 38 20V20C38 29.9411 29.9411 38 20 38V38C10.0589 38 2 29.9411 2 20V20Z" fill="#F3EBD4"/>
+                      <path d="M31.6173 19.5118L31.6173 19.5118L21.268 19.4781L21.304 9.12887L21.304 9.12886C21.3044 9.01118 21.2816 8.89458 21.2369 8.78571C21.1923 8.67684 21.1266 8.57783 21.0437 8.49434C20.9607 8.41085 20.8622 8.34452 20.7536 8.29912C20.645 8.25372 20.5286 8.23015 20.4109 8.22975C20.2932 8.22936 20.1766 8.25214 20.0678 8.29681C19.9589 8.34148 19.8599 8.40715 19.7764 8.49008C19.6929 8.57301 19.6266 8.67157 19.5812 8.78014C19.5358 8.8887 19.5122 9.00515 19.5118 9.12283L19.5118 9.12284L19.4781 19.4721L9.12887 19.4361L9.12886 19.4361C8.8912 19.4353 8.66296 19.529 8.49434 19.6964C8.32573 19.8639 8.23055 20.0915 8.22975 20.3292C8.22895 20.5668 8.3226 20.7951 8.49008 20.9637C8.65756 21.1323 8.88517 21.2275 9.12283 21.2283L9.12316 21.1283L9.12284 21.2283L19.4721 21.262L19.4361 31.6112L19.5361 31.6116L19.4361 31.6112C19.4353 31.8489 19.529 32.0771 19.6964 32.2458C19.8639 32.4144 20.0915 32.5095 20.3292 32.5103C20.5668 32.5111 20.7951 32.4175 20.9637 32.25C21.1323 32.0825 21.2275 31.8549 21.2283 31.6173L21.1283 31.6169L21.2283 31.6173L21.262 21.268L31.6112 21.304L31.6116 21.204L31.6112 21.304C31.7289 21.3044 31.8455 21.2816 31.9544 21.2369C32.0633 21.1923 32.1623 21.1266 32.2458 21.0437C32.3292 20.9607 32.3956 20.8622 32.441 20.7536C32.4864 20.645 32.51 20.5286 32.5103 20.4109C32.5107 20.2932 32.488 20.1766 32.4433 20.0678C32.3986 19.9589 32.333 19.8599 32.25 19.7764C32.1671 19.6929 32.0685 19.6266 31.96 19.5812C31.8514 19.5358 31.7349 19.5122 31.6173 19.5118Z" fill="#024F2D" stroke="#024F2D" stroke-width="0.2"/>
                     </svg>
-                </button>
-                <button *ngIf="plant.isInGarden" class="text-red-500" (click)="deletePlantToGarden(plant.id)">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
-                        </path>
+                  </button>
+                  
+                  
+                  <button *ngIf="plant.own" class="text-red-500 mr-4" (click)="deletePlantToGarden(plant.id, plant.own)">
+                    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M0 20C0 8.95431 8.95431 0 20 0V0C31.0457 0 40 8.95431 40 20V20C40 31.0457 31.0457 40 20 40V40C8.95431 40 0 31.0457 0 20V20Z" fill="#CE2D23"/>
+                      <path d="M2 20C2 10.0589 10.0589 2 20 2V2C29.9411 2 38 10.0589 38 20V20C38 29.9411 29.9411 38 20 38V38C10.0589 38 2 29.9411 2 20V20Z" fill="#F3EBD4"/>
+                      <path d="M30.871 19.6532L30.871 19.6532L21.1944 19.6217L21.1944 19.6217L19.722 19.6167L19.722 19.6167L10.0454 19.5831L10.0454 19.5831C9.82336 19.5824 9.61011 19.6699 9.45257 19.8263C9.29503 19.9828 9.20611 20.1955 9.20536 20.4175C9.20461 20.6396 9.2921 20.8528 9.44858 21.0104C9.60507 21.1679 9.81772 21.2568 10.0398 21.2576L10.0401 21.1576L10.0398 21.2576L19.7164 21.2891L19.7164 21.2891L21.1887 21.294L21.1887 21.294L30.8653 21.3277L30.8657 21.2306L30.8653 21.3277C30.9753 21.328 31.0842 21.3067 31.186 21.265C31.2877 21.2233 31.3802 21.1619 31.4582 21.0844C31.5362 21.0069 31.5982 20.9149 31.6406 20.8134C31.683 20.712 31.705 20.6032 31.7054 20.4932C31.7058 20.3833 31.6845 20.2744 31.6427 20.1726C31.601 20.0709 31.5396 19.9784 31.4622 19.9004C31.3847 19.8224 31.2926 19.7604 31.1912 19.718C31.0897 19.6756 30.9809 19.6536 30.871 19.6532Z" fill="#CE2D23" stroke="#CE2D23" stroke-width="0.2"/>
                     </svg>
-                </button>
+                  </button>
             </li>
         </ul>
     </div>

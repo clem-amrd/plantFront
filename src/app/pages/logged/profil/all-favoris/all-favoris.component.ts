@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../../../../shared/services/login.service';
 import { Router } from '@angular/router';
-import { Cat } from '../../../../shared/model/cat';
 import {APIURLWEB} from "../../../../../environments/environment";
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-all-favoris',
@@ -10,7 +10,7 @@ import {APIURLWEB} from "../../../../../environments/environment";
   styleUrls: ['./all-favoris.component.scss']
 })
 export class AllFavorisComponent {
-  constructor(private LoginService: LoginService, private router: Router) { }
+  constructor(private LoginService: LoginService, private router: Router, private location: Location) { }
 
   data: any[] = [];
   apiUrl = APIURLWEB;
@@ -19,25 +19,19 @@ export class AllFavorisComponent {
   ngOnInit() {
     this.LoginService.allFavoris()
       .then(response => {
-        if(!response.message){
-          this.noCats = false;
-        for (let cat of response) {
-          if (cat.photo !== "/storage/Image/") {
-            cat.photo = this.apiUrl + cat.photo;
-          } else {
-            cat.photo = this.apiUrl + "/storage/Image/inconnu.jpg";
-          }
-        }
         this.data = response;
-        console.log(this.data);
         // this.getCount();
-      }
       });
   }
 
+    //retour
+    back() {
+      this.location.back();
+    }
+
   //renvoyer vers la page du chat
   catPage(id: number): void {
-    this.router.navigate(['/cat'], { queryParams: { query: id } });
+    this.router.navigate(['/plant'], { queryParams: { query: id } });
   }
 
   //recuperer le nombre de personnes qui ont mis en favoris le chat
